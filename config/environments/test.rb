@@ -22,6 +22,8 @@ Rails.application.configure do
 
   # Raise exceptions instead of rendering exception templates.
   config.action_dispatch.show_exceptions = false
+  
+  config.time_zone = 'Central Time (US & Canada)'
 
   # Disable request forgery protection in test environment.
   config.action_controller.allow_forgery_protection = false

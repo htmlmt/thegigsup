@@ -29,17 +29,11 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 # Use Unicorn as the app server
 gem 'unicorn'
 
-gem "koala", "~> 2.2"
-
-gem 'harvested'
-
 gem 'curb'
 
 gem 'json'
 
 gem 'pry'
-
-gem 'groupdate'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
