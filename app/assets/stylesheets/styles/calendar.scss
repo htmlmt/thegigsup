@@ -1,0 +1,44 @@
+.events--list {
+    max-width: 600px;
+    margin: 0 auto;
+    .list--month {
+        text-transform: uppercase;
+        width: 80%;
+        margin-left: auto;
+        h1 {
+            margin: 1rem 0;
+            font-size: (24rem/16);
+            font-weight: 600;
+        }
+    }
+    .list--day {
+        @include flexbox();
+        @include flexbox-align-items(flex-start);
+        @include flexbox-justify-content(space-between);
+        margin-bottom: 2rem;
+        h2 {
+            margin: 0;
+            span {
+                font-size: (26rem/16);
+            }
+        }
+        p {
+            margin: 0;
+        }
+        .day--number {
+            width: 15%;
+            text-align: right;
+        }
+        .day--info {
+            width: 80%;
+        }
+        .info--time {
+            margin-bottom: 1rem;
+        }
+        .info--title,
+        .info--time {
+            padding: 1rem;
+            background-color: #aaaaaa;
+        }
+    }
+}

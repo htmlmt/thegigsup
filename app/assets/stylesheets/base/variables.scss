@@ -1,0 +1,142 @@
+// ---- ---- ---- ---- VARIABLES ---- ---- ---- ----
+
+// Site Colors
+$siteBlue: #33C9C5;
+$siteDarkBlue: #0C4C70;
+$siteGrey: #a0a0a0;
+$siteLightGrey: #a0a0a0;
+$siteGreen: #7acea7;
+$siteBrown: #6e5545;
+$siteGold: #c6bd77;
+$siteBlack: #1E2626;
+$siteYellow: #F6D82D;
+
+$largeMobileBreakpoint: 29.5em; 	// <472px
+$smallTabletBreakpoint: 800px; 	// <592px
+$tabletBreakpoint: 47.5em;			// <768px
+$desktopBreakpoint: 63em;			// <1024px
+$widescreenBreakpoint: 79.5em;		// <1280px
+$superWideBreakpoint: 112.5em;		// < 1808px
+
+// Greys
+$black: rgb(0,0,0); //#000000
+$darkerGrey: lighten($black, 10%);
+$darkGrey: lighten($black, 25%); //#404040
+$midGrey: lighten($black, 50%); //#808080
+$lightGrey: lighten($black, 75%); //#bfbfbf
+$lighterGrey: lighten($black, 90%); //#e6e6e6
+$white: rgb(255,255,255); //#ffffff
+
+// Root
+$bodyColor: $white;
+$textColor: $siteBlack;
+$columnMargin: .5em;
+$gutter: 1em;
+$warningColor: red;
+$textFontSize: 1em;
+
+// Typography
+$baseFont: 'Proxima Nova', sans-serif;
+$baseFontSize: 100%;
+$baselineHeight: 1.35em;
+$baseFontWeight: 300;
+$headingFont: $baseFont;
+$headingLineHeight: 1.1;
+
+$h1Color: $textColor;
+$h1Size: 4em;
+$h1FontWeight: 300;
+
+$h2Color: $textColor;
+$h2Size: 3em;
+$h2FontWeight: 300;
+
+$h3Color: $textColor;
+$h3Size: 2em;
+$h3FontWeight: 300;
+
+$h4Color: $textColor;
+$h4Size: 1.489em;
+$h4FontWeight: 300;
+
+$h5Color: $textColor;
+$h5Size: 1.862em;
+$h5FontWeight: 300;
+
+$h6Color: $textColor;
+$h6Size: 1.241em;
+$h6FontWeight: 300;
+
+$headingTextShadow: none;
+$codeFont: 'Source Code Pro', monospace;
+
+// Links
+$linkColor: $white;
+$linkHover: $white;
+$linkVisited: $white;
+$linkFocus: $white;
+$linkWeight: bold;
+
+// Forms
+$textboxBackground: $white;
+$textboxBorderColor: $siteBlack;
+$textboxBorderColorActive: $siteBlue;
+$textboxBorderWidth: 1px;
+$textboxBorderStyle: solid;
+$textboxColor: $textColor;
+$textboxPlaceholderColor: $midGrey;
+$textboxPlaceholderSize: 1em;
+$textboxPlaceholderStyle: normal; //Change to italic if you want placeholder text to be italic.
+$textboxPadding: .375em 1.5em;
+$textboxOutline: none;
+$textboxMaxWidth: 30em;
+
+$labelFontSize: 1.125em;
+$labelColor: $textColor;
+
+$buttonBackground: $siteBlue;
+//$buttonBackground2: $siteLightGreen; //Uncomment if you want a gradient background on a button. Also uncomment gradient in
+$buttonBorderColor: $textColor;
+$buttonBorderWidth: 0;
+$buttonBorderStyle: solid;
+$buttonColor: $white;
+$buttonOutlineColor: none;
+$buttonFont: $baseFont;
+$buttonFontSize: .875em;
+$buttonFontWeight: normal;
+$buttonPadding: .5em 1.5em;
+
+$buttonAltBackground: $textColor;
+//$buttonAltBackground2: $siteLightGrey;
+
+// Tables
+$tableBackground: transparent;
+$tableCellPadding: .25em;
+$tableStripe: $siteLightGrey;
+$tableFontSize: .875em;
+$tableLineHeight: 1.4em;
+$tableBorderWidth: 1px;
+$tableBorderStyle: solid;
+$tableBorderColor: $siteLightGrey;
+$tableHover: transparent;
+
+// Blockquotes
+$blockquoteMarginBottom: .875rem;
+$blockquotePaddingLeft: 0;
+$blockquoteBorderWidth: 0;
+$blockquoteBorderStyle: solid;
+$blockquoteBorderColor: $siteLightGrey;
+$blockquoteColor: $midGrey;
+$blockquoteFontFamily: $headingFont;
+$blockquoteFontSize: 1.25rem;
+$blockquoteFontStyle: italic;
+$blockquoteFontWeight: 200;
+
+// Code/Pre blocks
+$codeMargin: 1em 0;
+$codePadding: $gutter / 2;
+$codeBackground: white;
+$codeBorder: 0;
+$codeFontFamily: $codeFont;
+$codeFontSize: .875em;
+$codeColor: $textColor;

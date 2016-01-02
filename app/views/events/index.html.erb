@@ -1,0 +1,42 @@
+<p id="notice"><%= notice %></p>
+
+<div class="events--list">
+    <div class="list--month">
+        <h1><%= @month %></h1>
+    </div>
+    <% @dates.each do |date| %>
+        <div class="list--day">
+            <div class="day--number">
+                <%= date.strftime("%a") %><br>
+                <%= date.strftime("%e") %>
+            </div>
+            <div class="day--info">
+                <% events = Event.where('start BETWEEN ? AND ?', date, date.end_of_day).order(:start) %>
+                <% events.each do |event| %>
+                    <div class="info--title">
+                        <h2>
+                            <strong>
+                                <% if event.bands.count == 1 %>
+                                    <%= event.bands.first.name %>
+                                <% else %>
+                                    <% first_bands = event.bands[0...-1].map { |band| band.name }.join ', ' %>
+                                    <% last_band = event.bands[-1].name %>
+                                    <%= first_bands + ', and ' + last_band %>
+                                <% end %>
+                            </strong>
+                            <br>
+                            <span>
+                                <%= event.venue.name %>
+                            </span>
+                        </h2>
+                    </div>
+                    <div class="info--time">
+                        <p>
+                            <%= event.start.in_time_zone.strftime("%l:%M %P") %>
+                        </p>
+                    </div>
+                <% end %>
+            </div>
+        </div>
+    <% end %>
+</div>
