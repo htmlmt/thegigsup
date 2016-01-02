@@ -3,10 +3,11 @@
     margin: 0 auto;
     .list--month {
         text-transform: uppercase;
-        width: 80%;
-        margin-left: auto;
+        width: 95%;
+        margin: 0 auto;
         h1 {
-            margin: 1rem 0;
+            width: 90%;
+            margin: 1rem 0 1rem auto;
             font-size: (24rem/16);
             font-weight: 600;
         }
@@ -14,31 +15,40 @@
     .list--day {
         @include flexbox();
         @include flexbox-align-items(flex-start);
-        @include flexbox-justify-content(space-between);
-        margin-bottom: 2rem;
+        width: 95%;
+        margin: 0 auto 1rem auto;
         h2 {
-            margin: 0;
-            span {
-                font-size: (26rem/16);
-            }
+            margin: 0 0 1rem 0;
+            font-size: (36rem/16);
+            font-weight: bold;
+            color: white;
+        }
+        h3 {
+            font-size: (28rem/16);
+            color: white;
+        }
+        h4 {
+            margin: 0 0 .25rem 0;
         }
         p {
             margin: 0;
         }
         .day--number {
-            width: 15%;
-            text-align: right;
+            width: 10%;
         }
         .day--info {
-            width: 80%;
+            width: 85%;
         }
         .info--time {
-            margin-bottom: 1rem;
+            margin: 1rem 0;
+            p {
+                color: white;
+            }
         }
-        .info--title,
-        .info--time {
+        .info--container {
             padding: 1rem;
-            background-color: #aaaaaa;
+            background-color: #C33228;
+            margin-bottom: 1rem;
         }
     }
 }
