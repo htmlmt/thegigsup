@@ -2,7 +2,7 @@
 
 <div class="events--list">
     <div class="list--month">
-        <h1><%= @month %></h1>
+        <h1><span><%= (@month - 1.month).strftime("%B") %></span> <%= @month.strftime("%B") %> <span><%= (@month + 1.month).strftime("%B") %></span></h1>
     </div>
     <% @dates.each do |date| %>
         <div class="list--day">
@@ -16,16 +16,12 @@
                     <div class="info--container">
                         <div class="info--title">
                             <h2>
-                                <% if event.bands.count == 1 %>
-                                    <%= event.bands.first.name %>
-                                <% else %>
-                                    <% first_bands = event.bands[0...-1].map { |band| band.name }.join ', ' %>
-                                    <% last_band = event.bands[-1].name %>
-                                    <%= first_bands + ', and ' + last_band %>
+                                <% event.bands.each do |band| %>
+                                    <%= link_to band.name, band_path(band) %><br>
                                 <% end %>
                             </h2>
                             <h3>
-                                <%= event.venue.name %>
+                                <%= link_to event.venue.name, venue_path(event.venue) %>
                             </h3>
                         </div>
                         <div class="info--time">
