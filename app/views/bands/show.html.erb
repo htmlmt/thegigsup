@@ -2,7 +2,14 @@
 
 <div class="events--list">
     <div class="list--month">
-        <h1><%= @dates.first.strftime("%^B") %></h1>
+        <div class="month--container">
+            <div class="month--names">
+                <h1><%= @dates.first.strftime("%^B") %></h1>
+            </div>
+            <div class="month--add">
+                <h1><a href="/events/new">ADD EVENT</a></h1>
+            </div>
+        </div>
     </div>
     <% if @dates.count == 0 %>
         <div class="list--day">
@@ -22,7 +29,14 @@
         <% if @dates.first.strftime("%^B") != date.strftime("%^B") %>
             <% unless months.include? date.strftime("%^B") %>
                 <div class="list--month">
-                    <h1><%= date.strftime("%^B") %></h1>
+                    <div class="month--container">
+                        <div class="month--names">
+                            <h1><%= date.strftime("%^B") %></h1>
+                        </div>
+                        <div class="month--add">
+                            
+                        </div>
+                    </div>
                 </div>
                 <% months << date.strftime("%^B") %>
             <% end %>
@@ -42,14 +56,22 @@
                                     <%= link_to band.name, band_path(band) %><br>
                                 <% end %>
                             </h2>
+                            <%= link_to venue_path(event.venue) do %>
                             <h3>
-                                <%= link_to event.venue.name, venue_path(event.venue) %>
+                                <%= event.venue.name %>
+                                <div class="arrow">
+                                    <%= image_tag('arrow.png') %>
+                                </div>
                             </h3>
+                            <% end %>
                         </div>
                         <div class="info--time">
                             <p>
                                 <%= event.start.in_time_zone.strftime("%l:%M %P") %>
                             </p>
+                            <div class="time--upload">
+                                <%= image_tag('upload-poster.png') %>
+                            </div>
                         </div>
                     </div>
                 <% end %>

@@ -82,6 +82,8 @@ GEM
     nokogiri (1.6.6.2)
       mini_portile (~> 0.6.0)
     pg (0.18.3)
+    picture_tag-rails (0.0.5)
+      rails (>= 3.0)
     pry (0.10.1)
       coderay (~> 1.1.0)
       method_source (~> 0.8.1)
@@ -167,6 +169,7 @@ DEPENDENCIES
   jquery-rails
   json
   pg
+  picture_tag-rails
   pry
   rails (= 4.2.2)
   sass-rails (~> 5.0)

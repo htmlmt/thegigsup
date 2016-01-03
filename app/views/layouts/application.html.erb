@@ -13,8 +13,21 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-
+<header class="body--header">
+    <div class="header--container">
+        <div class="header--logo">
+            <a href="/"><%= image_tag('header-logo.png') %></a>
+        </div>
+        <nav class="header--nav">
+            <div class="nav--link">
+                <a href="/">Gigs</a>
+            </div>
+            <div class="nav--link">
+                <a href="/calendar">Calendar</a>
+            </div>
+        </nav>
+    </div>
+</header>
 <%= yield %>
-
 </body>
 </html>

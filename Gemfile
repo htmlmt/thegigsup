@@ -37,6 +37,8 @@ gem 'pry'
 
 gem 'friendly_id', '~> 5.1.0'
 
+gem 'picture_tag-rails'
+
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 

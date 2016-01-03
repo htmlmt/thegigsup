@@ -1,0 +1,57 @@
+.gigs--loading {
+    @include animation('hide 2.5s 1 2s forwards');
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    transition-duration: 1s;
+}
+
+.loading--graphic {
+    @include animation('hide-loading 1.5s 2.5s forwards');
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url(loading.png);
+    background-size: cover;
+    background-position: 50% 90%;
+    z-index: 0;
+}
+
+.loading--message {
+    @include animation('hide-loading 1.5s 2s forwards');
+    position: absolute;
+    bottom: 2.5%;
+    left: 0;
+    width: 100%;
+    text-align: center;
+    z-index: 10;
+}
+
+.message--indicator {
+    @include animation('hide-loading 1.5s 2s forwards');
+    img {
+        @include animation('rotate 1.5s infinite linear');
+        width: 40px;
+        display: block;
+        margin: 0 auto;
+    }
+}
+
+@include keyframes(rotate) {
+    0%   { @include transform-rotate(0); }
+    100% { @include transform-rotate(360); }
+}
+
+@include keyframes(hide) {
+    0%   { top: 0; }
+    100% { top: -100%; }
+}
+
+@include keyframes(hide-loading) {
+    0%   { opacity: 1; }
+    100% { opacity: 0; }
+}
