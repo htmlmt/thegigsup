@@ -10,6 +10,7 @@ $siteBrown: #6e5545;
 $siteGold: #c6bd77;
 $siteBlack: #1E2626;
 $siteYellow: #F6D82D;
+$siteRed: #D32E20;
 
 $largeMobileBreakpoint: 29.5em; 	// <472px
 $smallTabletBreakpoint: 800px; 	// <592px
@@ -80,7 +81,7 @@ $linkWeight: bold;
 // Forms
 $textboxBackground: $white;
 $textboxBorderColor: $siteBlack;
-$textboxBorderColorActive: $siteBlue;
+$textboxBorderColorActive: $siteGrey;
 $textboxBorderWidth: 1px;
 $textboxBorderStyle: solid;
 $textboxColor: $textColor;
@@ -94,7 +95,7 @@ $textboxMaxWidth: 30em;
 $labelFontSize: 1.125em;
 $labelColor: $textColor;
 
-$buttonBackground: $siteBlue;
+$buttonBackground: $siteRed;
 //$buttonBackground2: $siteLightGreen; //Uncomment if you want a gradient background on a button. Also uncomment gradient in
 $buttonBorderColor: $textColor;
 $buttonBorderWidth: 0;

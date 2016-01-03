@@ -104,10 +104,10 @@ class EventsController < ApplicationController
             dateString = params[:month] + ' ' + params[:year]
             @month = Time.parse(dateString)
             
-            events = Event.where("start >= ? AND start <= ?", @month.beginning_of_month, Time.parse(dateString).end_of_month)
+            events = Event.where("start >= ? AND start <= ?", @month.beginning_of_month, Time.parse(dateString).end_of_month).order(:start)
         else
             @month = Time.now
-            events = Event.where("start >= ? AND start <= ?", @month.beginning_of_month, Time.now.end_of_month)
+            events = Event.where("start >= ? AND start <= ?", @month, Time.now.end_of_month).order(:start)
         end
         
         @dates = []
@@ -137,10 +137,20 @@ class EventsController < ApplicationController
     # POST /events.json
     def create
         @event = Event.new(event_params)
-
+        
+        @venue = Venue.find(params[:event][:venue_id])
+        @bands = []
+        
         respond_to do |format|
             if @event.save
-                format.html { redirect_to @event, notice: 'Event was successfully created.' }
+                @event.start = params[:event][:start]
+                @venue.events << @event
+                params[:event][:band_ids].each_with_index do |id, index|
+                    if index != 0
+                        @event.bands << Band.find(id)
+                    end
+                end
+                format.html { redirect_to events_url, notice: 'Event was successfully created.' }
                 format.json { render :show, status: :created, location: @event }
             else
                 format.html { render :new }
@@ -154,7 +164,7 @@ class EventsController < ApplicationController
     def update
         respond_to do |format|
             if @event.update(event_params)
-                format.html { redirect_to @event, notice: 'Event was successfully updated.' }
+                format.html { redirect_to events_url, notice: 'Event was successfully updated.' }
                 format.json { render :show, status: :ok, location: @event }
             else
                 format.html { render :edit }

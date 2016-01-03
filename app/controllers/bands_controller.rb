@@ -10,7 +10,7 @@ class BandsController < ApplicationController
   # GET /bands/1
   # GET /bands/1.json
   def show
-      events = @band.events
+      events = @band.events.order(:start)
       
       @dates = []
   
