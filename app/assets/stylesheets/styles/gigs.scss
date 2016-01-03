@@ -22,7 +22,14 @@
         left: 0;
         right: 0;
         margin: 0 auto;
-        max-width: 500px;
+        width: auto;
+        height: 90%;
+        img {
+            display: block;
+            width: auto;
+            margin: 0 auto;
+            height: 100%;
+        }
         &.top {
             z-index: 15;
         }
