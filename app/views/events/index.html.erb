@@ -2,7 +2,7 @@
 
 <div class="events--list">
     <div class="list--month">
-        <h1><span><%= link_to (@month - 1.month).strftime("%^b"), '/events/' + (@month - 1.month).strftime("%B").downcase + '/' + (@month - 1.month).strftime("%Y") %></span> <%= @month.strftime("%^b") %> <span><%= link_to (@month + 1.month).strftime("%^b"), '/events/' + (@month + 1.month).strftime("%B").downcase + '/' + (@month + 1.month).strftime("%Y") %></span></h1>
+        <h1><% if @month.beginning_of_month - 1.month >= Time.now.beginning_of_month %><span><%= link_to (@month - 1.month).strftime("%^b"), '/events/' + (@month - 1.month).strftime("%B").downcase + '/' + (@month - 1.month).strftime("%Y") %></span><% end %> <%= @month.strftime("%^b") %> <span><%= link_to (@month + 1.month).strftime("%^b"), '/events/' + (@month + 1.month).strftime("%B").downcase + '/' + (@month + 1.month).strftime("%Y") %></span></h1>
     </div>
     <% if @dates.count == 0 %>
         <div class="list--day">

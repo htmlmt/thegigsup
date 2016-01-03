@@ -43,7 +43,7 @@
                                 <% end %>
                             </h2>
                             <h3>
-                                <%= event.venue.name %>
+                                <%= link_to event.venue.name, venue_path(event.venue) %>
                             </h3>
                         </div>
                         <div class="info--time">
