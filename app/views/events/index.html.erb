@@ -2,8 +2,21 @@
 
 <div class="events--list">
     <div class="list--month">
-        <h1><span><%= (@month - 1.month).strftime("%B") %></span> <%= @month.strftime("%B") %> <span><%= (@month + 1.month).strftime("%B") %></span></h1>
+        <h1><span><%= link_to (@month - 1.month).strftime("%^b"), '/events/' + (@month - 1.month).strftime("%B").downcase + '/' + (@month - 1.month).strftime("%Y") %></span> <%= @month.strftime("%^b") %> <span><%= link_to (@month + 1.month).strftime("%^b"), '/events/' + (@month + 1.month).strftime("%B").downcase + '/' + (@month + 1.month).strftime("%Y") %></span></h1>
     </div>
+    <% if @dates.count == 0 %>
+        <div class="list--day">
+            <div class="day--number">
+            </div>
+            <div class="day--info">
+                <div class="info--container">
+                    <div class="info--title">
+                        <h2>No events listed.</h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+    <% end %>
     <% @dates.each do |date| %>
         <div class="list--day">
             <div class="day--number">

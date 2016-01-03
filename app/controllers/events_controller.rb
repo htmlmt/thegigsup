@@ -93,17 +93,24 @@ class EventsController < ApplicationController
                 end
             end
         end
-      
-        events = Event.where("start >= ? AND start <= ?", Time.now.beginning_of_month, Time.now.end_of_month)
-        @dates = []
         
+        if params[:month] && params[:year]
+            dateString = params[:month] + ' ' + params[:year]
+            @month = Time.parse(dateString)
+            
+            events = Event.where("start >= ? AND start <= ?", @month.beginning_of_month, Time.parse(dateString).end_of_month)
+        else
+            @month = Time.now
+            events = Event.where("start >= ? AND start <= ?", @month.beginning_of_month, Time.now.end_of_month)
+        end
+        
+        @dates = []
+    
         events.each do |event|
             unless @dates.include? event.start.beginning_of_day
                 @dates << event.start.beginning_of_day
             end
         end
-        
-        @month = Time.now
     end
 
     # GET /events/1

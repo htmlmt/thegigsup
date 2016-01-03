@@ -10,8 +10,11 @@
             margin: 1rem 0 1rem auto;
             font-size: (24rem/16);
             font-weight: 600;
-            span {
-                opacity: .25;
+            span,
+            a {
+                font-weight: 600;
+                opacity: .5;
+                color: $siteBlack;
             }
         }
     }
@@ -23,6 +26,7 @@
         h2 {
             margin: 0 0 1rem 0;
             font-size: (36rem/16);
+            font-weight: bold;
             a {
                 color: $siteBlack;
                 font-weight: bold;
