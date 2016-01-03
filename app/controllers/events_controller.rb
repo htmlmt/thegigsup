@@ -42,17 +42,17 @@ class EventsController < ApplicationController
                     if (Venue.find_by songkick_id: event["venue"]["id"].to_i) == nil
                         venueCall = "http://api.songkick.com/api/3.0/venues/" + event["venue"]["id"].to_s + ".json?apikey=" + ENV["API_KEY"]
                     
-                        venue = Curl::Easy.new(venueCall) do |curl|
+                        venueCurl = Curl::Easy.new(venueCall) do |curl|
                         
                         end
                     
-                        venue.perform
+                        venueCurl.perform
                     
-                        venueJSON = JSON.parse(venue.body_str)
+                        venueJSON = JSON.parse(venueCurl.body_str)
                     
                         venueJSON = venueJSON["resultsPage"]["results"]["venue"]
                     
-                        new_venue = Venue.new(
+                        @venue = Venue.new(
                             songkick_id: venueJSON["id"].to_i,
                             name: venueJSON["displayName"],
                             city: venueJSON["city"]["displayName"],
@@ -62,33 +62,35 @@ class EventsController < ApplicationController
                             street: venueJSON["street"]
                         )
                     
-                        new_venue.save
+                        @venue.save
                     else
-                        new_venue = Venue.find_by songkick_id: event["venue"]["id"].to_i
+                        @venue = Venue.find_by songkick_id: event["venue"]["id"].to_i
                     end
                 
-                    new_event = Event.new(
+                    @event = Event.new(
                         songkick_id: event["id"].to_i,
                         start: event["start"]["datetime"]
                     )
                 
-                    new_event.save
+                    @event.save
                 
-                    new_venue.events << new_event
+                    @venue.events << @event
                 
                     bands = event["performance"]
                 
                     bands.each do |band|
                         if (Band.find_by songkick_id: band["artist"]["id"].to_i) == nil
-                            new_band = Band.new(
+                            @band = Band.new(
                                 songkick_id: band["artist"]["id"].to_i,
                                 name: band["artist"]["displayName"]
                             )
+                            
+                            @band.save
                         else
-                            new_band = Band.find_by songkick_id: band["artist"]["id"].to_i
+                            @band = Band.find_by songkick_id: band["artist"]["id"].to_i
                         end
                     
-                        new_event.bands << new_band
+                        @event.bands << @band
                     end
                 end
             end

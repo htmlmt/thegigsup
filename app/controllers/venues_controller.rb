@@ -10,6 +10,17 @@ class VenuesController < ApplicationController
   # GET /venues/1
   # GET /venues/1.json
   def show
+      events = Event.where(venue_id: @venue.id)
+      
+      @dates = []
+  
+      events.each do |event|
+          unless event.start == nil
+              unless @dates.include? event.start.beginning_of_day
+                  @dates << event.start.beginning_of_day
+              end
+          end
+      end
   end
 
   # GET /venues/new
