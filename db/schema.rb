@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160103031701) do
+ActiveRecord::Schema.define(version: 20160103175156) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -37,12 +37,16 @@ ActiveRecord::Schema.define(version: 20160103031701) do
 
   create_table "events", force: :cascade do |t|
     t.integer  "facebook_id"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.datetime "created_at",          null: false
+    t.datetime "updated_at",          null: false
     t.integer  "songkick_id"
     t.integer  "band_id"
     t.integer  "venue_id"
     t.datetime "start"
+    t.string   "poster_file_name"
+    t.string   "poster_content_type"
+    t.integer  "poster_file_size"
+    t.datetime "poster_updated_at"
   end
 
   create_table "friendly_id_slugs", force: :cascade do |t|

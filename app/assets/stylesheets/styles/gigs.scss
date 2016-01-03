@@ -1,15 +1,65 @@
 .gigs--loading {
-    @include animation('hide 2.5s 1 2s forwards');
+    @include animation('hide 1.5s 1 2s forwards');
     position: absolute;
     top: 0;
-    left: 0;
     width: 100%;
     height: 100%;
     transition-duration: 1s;
+    z-index: 100;
+}
+
+.gigs--posters {
+    position: absolute;
+    height: 85%;
+    width: 100%;
+    top: 15%;
+    left: 0;
+    z-index: -10;
+    background-color: $siteGrey;
+    .posters--event {
+        position: absolute;
+        top: 50%;
+        left: 0;
+        right: 0;
+        margin: 0 auto;
+        max-width: 500px;
+        &.top {
+            z-index: 15;
+        }
+        &.hidden {
+            .event--overlay {
+                position: absolute;
+                height: 100%;
+                width: 100%;
+                background-color: $siteLightGrey;
+                z-index: 10;
+            }
+        }
+    }
+    .posters--event:nth-child(3n) {
+        -webkit-transform: translate(0, -50%) rotate(-5deg);
+        -moz-transform: translate(0, -50%) rotate(-5deg);
+        -ms-transform: translate(0, -50%) rotate(-5deg);
+        -o-transform: translate(0, -50%) rotate(-5deg);
+        transform: translate(0, -50%) rotate(-5deg);
+    }
+    .posters--event:nth-child(3n+1) {
+        -webkit-transform: translate(0, -50%) rotate(3deg);
+        -moz-transform: translate(0, -50%) rotate(3deg);
+        -ms-transform: translate(0, -50%) rotate(3deg);
+        -o-transform: translate(0, -50%) rotate(3deg);
+        transform: translate(0, -50%) rotate(3deg);
+    }
+    .posters--event:nth-child(3n+2) {
+        -webkit-transform: translate(0, -50%) rotate(1deg);
+        -moz-transform: translate(0, -50%) rotate(1deg);
+        -ms-transform: translate(0, -50%) rotate(1deg);
+        -o-transform: translate(0, -50%) rotate(1deg);
+        transform: translate(0, -50%) rotate(1deg);
+    }
 }
 
 .loading--graphic {
-    @include animation('hide-loading 1.5s 2.5s forwards');
     position: absolute;
     top: 0;
     left: 0;
@@ -49,9 +99,4 @@
 @include keyframes(hide) {
     0%   { top: 0; }
     100% { top: -100%; }
-}
-
-@include keyframes(hide-loading) {
-    0%   { opacity: 1; }
-    100% { opacity: 0; }
 }

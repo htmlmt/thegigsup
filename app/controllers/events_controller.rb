@@ -1,8 +1,17 @@
 class EventsController < ApplicationController
+    autocomplete :venue, :name, :full => true
+    autocomplete :band, :name, :full => true
+    
     before_action :set_event, only: [:show, :edit, :update, :destroy]
     
     def gigs
-        
+        gigs = Event.order(:updated_at)
+        @gigs = []
+        gigs.each do |gig|
+            if gig.poster.exists?
+                @gigs << gig
+            end
+        end
     end
 
     # GET /events
@@ -138,16 +147,29 @@ class EventsController < ApplicationController
     def create
         @event = Event.new(event_params)
         
-        @venue = Venue.find(params[:event][:venue_id])
+        if Venue.find_by(name: params[:venue]) == nil
+            @venue = Venue.create(name: params[:venue])
+        else
+            @venue = Venue.find_by(name: params[:venue])
+        end
+        
         @bands = []
         
         respond_to do |format|
             if @event.save
-                @event.start = params[:event][:start]
                 @venue.events << @event
-                params[:event][:band_ids].each_with_index do |id, index|
-                    if index != 0
-                        @event.bands << Band.find(id)
+                
+                bands = params[:bands].split(",")
+                
+                bands.each do |band|
+                    band = band.strip
+                end
+                
+                bands.each do |band|
+                    if Band.find_by(name: band) == nil
+                        @event.bands << Band.create(name: band)
+                    else
+                        @event.bands << Band.find_by(name: band)
                     end
                 end
                 format.html { redirect_to events_url, notice: 'Event was successfully created.' }
@@ -191,6 +213,6 @@ class EventsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def event_params
-        params.require(:event).permit(:facebook_id)
+        params.require(:event).permit(:facebook_id, :poster, :start)
     end
 end

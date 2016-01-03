@@ -13,16 +13,20 @@
     
     <div class="field">
         <%= f.label :venue %><br>
-        <%= f.collection_select :venue_id, Venue.all.order(:name), :id, :name, :prompt => true %>
+        <%= autocomplete_field_tag 'venue', '', autocomplete_venue_name_events_path %>
     </div>
     <div class="field">
         <%= f.label :bands %><br>
-        <%= f.collection_select(:band_ids, Band.all.order(:name), :id, :name,{}, {:multiple => true}) %>
+        <%= autocomplete_field_tag 'bands', '', autocomplete_band_name_events_path, 'data-delimiter' => ', ', :multiple => true %>
     </div>
     <div class="field">
         <%= f.label :start %><br>
         <%= f.datetime_local_field :start %>
     </div>
+    <div class="field">
+        <%= f.label :poster %>
+        <%= f.file_field :poster %>
+      </div>
     <div class="actions">
         <%= f.submit %>
     </div>

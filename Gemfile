@@ -37,7 +37,13 @@ gem 'pry'
 
 gem 'friendly_id', '~> 5.1.0'
 
-gem 'picture_tag-rails'
+gem 'paperclip'
+
+gem 'aws-sdk', '< 2.0'
+
+gem 'jquery-ui-rails'
+
+gem 'rails4-autocomplete'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development

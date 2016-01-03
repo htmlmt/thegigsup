@@ -11,3 +11,22 @@
         </div>
     </div>
 </div>
+<div class="gigs--posters">
+    <% @gigs.each_with_index do |gig, index| %>
+        <% if index == 0 %>
+            <div class="posters--event top">
+                <div class="event--overlay">
+                    
+                </div>
+                <%= image_tag gig.poster.url(:retina) %>
+            </div>
+        <% else %>
+            <div class="posters--event hidden">
+                <div class="event--overlay">
+                    
+                </div>
+                <%= image_tag gig.poster.url(:retina) %>
+            </div>
+        <% end %>
+    <% end %>
+</div>
