@@ -22,25 +22,13 @@
         left: 0;
         right: 0;
         margin: 0 auto;
-        width: auto;
-        height: 90%;
+        min-width: 320px;
+        width: 40%;
+        transition-duration: .2s;
         img {
             display: block;
             width: auto;
             margin: 0 auto;
-            height: 100%;
-        }
-        &.top {
-            z-index: 15;
-        }
-        &.hidden {
-            .event--overlay {
-                position: absolute;
-                height: 100%;
-                width: 100%;
-                background-color: $siteLightGrey;
-                z-index: 10;
-            }
         }
     }
     .posters--event:nth-child(3n) {
@@ -49,13 +37,31 @@
         -ms-transform: translate(0, -50%) rotate(-5deg);
         -o-transform: translate(0, -50%) rotate(-5deg);
         transform: translate(0, -50%) rotate(-5deg);
+        -webkit-backface-visibility: hidden;
+        &.hide {
+            -webkit-transform: translate(0, -80%) rotate(0deg);
+            -moz-transform: translate(0, -80%) rotate(0deg);
+            -ms-transform: translate(0, -80%) rotate(0deg);
+            -o-transform: translate(0, -80%) rotate(0deg);
+            transform: translate(0, -80%) rotate(0deg);
+            top: 0;
+        }
     }
     .posters--event:nth-child(3n+1) {
-        -webkit-transform: translate(0, -50%) rotate(3deg);
-        -moz-transform: translate(0, -50%) rotate(3deg);
-        -ms-transform: translate(0, -50%) rotate(3deg);
-        -o-transform: translate(0, -50%) rotate(3deg);
-        transform: translate(0, -50%) rotate(3deg);
+        -webkit-transform: translate(0, -50%) rotate(5deg);
+        -moz-transform: translate(0, -50%) rotate(5deg);
+        -ms-transform: translate(0, -50%) rotate(5deg);
+        -o-transform: translate(0, -50%) rotate(5deg);
+        transform: translate(0, -50%) rotate(5deg);
+        -webkit-backface-visibility: hidden;
+        &.hide {
+            -webkit-transform: translate(0, -80%) rotate(-3deg);
+            -moz-transform: translate(0, -80%) rotate(-3deg);
+            -ms-transform: translate(0, -80%) rotate(-3deg);
+            -o-transform: translate(0, -80%) rotate(-3deg);
+            transform: translate(0, -80%) rotate(-3deg);
+            top: 0;
+        }
     }
     .posters--event:nth-child(3n+2) {
         -webkit-transform: translate(0, -50%) rotate(1deg);
@@ -63,6 +69,15 @@
         -ms-transform: translate(0, -50%) rotate(1deg);
         -o-transform: translate(0, -50%) rotate(1deg);
         transform: translate(0, -50%) rotate(1deg);
+        -webkit-backface-visibility: hidden;
+        &.hide {
+            -webkit-transform: translate(0, -80%) rotate(-1deg);
+            -moz-transform: translate(0, -80%) rotate(-1deg);
+            -ms-transform: translate(0, -80%) rotate(-1deg);
+            -o-transform: translate(0, -80%) rotate(-1deg);
+            transform: translate(0, -80%) rotate(-1deg);
+            top: 0;
+        }
     }
 }
 
