@@ -22,12 +22,22 @@
         left: 0;
         right: 0;
         margin: 0 auto;
-        min-width: 320px;
-        width: 40%;
+        height: 80%;
         transition-duration: .2s;
+        background-size: contain;
+        background-repeat: no-repeat;
+        background-position: 50% 50%;
+        .event--image {
+            opacity: 0;
+        }
         img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
             display: block;
             width: auto;
+            height: 100%;
             margin: 0 auto;
         }
     }

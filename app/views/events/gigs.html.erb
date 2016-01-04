@@ -15,18 +15,20 @@
     <% @gigs.each_with_index do |gig, index| %>
         <% if index == (@gigs.count - 1) %>
             <div class="posters--event top">
-                <div class="event--overlay">
-                    
-                </div>
-                <%= image_tag gig.poster.url(:retina) %>
+                <%= image_tag gig.poster.url(:retina), class: 'event--image' %>
             </div>
         <% else %>
             <div class="posters--event">
-                <div class="event--overlay">
-                    
-                </div>
-                <%= image_tag gig.poster.url(:retina) %>
+                <%= image_tag gig.poster.url(:retina), class: 'event--image' %>
             </div>
         <% end %>
     <% end %>
 </div>
+<script>
+    $('.event--image').each(function(){
+        var src = $(this).attr('src');
+        console.log(src);
+        console.log($(this).parent());
+        $(this).parent().css('background-image', 'url(' + src + ')');
+    });
+</script>
