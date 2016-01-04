@@ -27,8 +27,6 @@
 <script>
     $('.event--image').each(function(){
         var src = $(this).attr('src');
-        console.log(src);
-        console.log($(this).parent());
         $(this).parent().css('background-image', 'url(' + src + ')');
     });
 </script>
