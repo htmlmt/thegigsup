@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :reposts
   resources :bands
   resources :venues
   resources :events do

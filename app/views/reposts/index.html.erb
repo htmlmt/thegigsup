@@ -1,0 +1,27 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Reposts</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Event</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @reposts.each do |repost| %>
+      <tr>
+        <td><%= repost.event_id %></td>
+        <td><%= link_to 'Show', repost %></td>
+        <td><%= link_to 'Edit', edit_repost_path(repost) %></td>
+        <td><%= link_to 'Destroy', repost, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Repost', new_repost_path %>

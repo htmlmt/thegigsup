@@ -6,6 +6,7 @@
     height: 100%;
     transition-duration: 1s;
     z-index: 100;
+    background-color: $white;
 }
 
 .gigs--posters {
@@ -16,6 +17,19 @@
     left: 0;
     z-index: -10;
     background-color: $siteGrey;
+    .posters--repost {
+        position: fixed;
+        top: 50%;
+        right: 0;
+        width: 100px;
+        opacity: .8;
+        transition-duration: .25s;
+        z-index: 99999;
+        cursor: pointer;
+        &:hover {
+            opacity: 1;
+        }
+    }
     .posters--event {
         position: absolute;
         top: 50%;
@@ -31,8 +45,6 @@
         background-position: 50% 50%;
         .event--image {
             opacity: 0;
-        }
-        img {
             position: absolute;
             top: 0;
             left: 0;
@@ -44,38 +56,6 @@
         }
     }
     .posters--event:nth-child(3n) {
-        -webkit-transform: translate(0, -50%) rotate(-5deg);
-        -moz-transform: translate(0, -50%) rotate(-5deg);
-        -ms-transform: translate(0, -50%) rotate(-5deg);
-        -o-transform: translate(0, -50%) rotate(-5deg);
-        transform: translate(0, -50%) rotate(-5deg);
-        -webkit-backface-visibility: hidden;
-        &.hide {
-            -webkit-transform: translate(0, -80%) rotate(0deg);
-            -moz-transform: translate(0, -80%) rotate(0deg);
-            -ms-transform: translate(0, -80%) rotate(0deg);
-            -o-transform: translate(0, -80%) rotate(0deg);
-            transform: translate(0, -80%) rotate(0deg);
-            top: 0;
-        }
-    }
-    .posters--event:nth-child(3n+1) {
-        -webkit-transform: translate(0, -50%) rotate(5deg);
-        -moz-transform: translate(0, -50%) rotate(5deg);
-        -ms-transform: translate(0, -50%) rotate(5deg);
-        -o-transform: translate(0, -50%) rotate(5deg);
-        transform: translate(0, -50%) rotate(5deg);
-        -webkit-backface-visibility: hidden;
-        &.hide {
-            -webkit-transform: translate(0, -80%) rotate(-3deg);
-            -moz-transform: translate(0, -80%) rotate(-3deg);
-            -ms-transform: translate(0, -80%) rotate(-3deg);
-            -o-transform: translate(0, -80%) rotate(-3deg);
-            transform: translate(0, -80%) rotate(-3deg);
-            top: 0;
-        }
-    }
-    .posters--event:nth-child(3n+2) {
         -webkit-transform: translate(0, -50%) rotate(1deg);
         -moz-transform: translate(0, -50%) rotate(1deg);
         -ms-transform: translate(0, -50%) rotate(1deg);
@@ -83,12 +63,65 @@
         transform: translate(0, -50%) rotate(1deg);
         -webkit-backface-visibility: hidden;
         &.hide {
-            -webkit-transform: translate(0, -80%) rotate(-1deg);
-            -moz-transform: translate(0, -80%) rotate(-1deg);
-            -ms-transform: translate(0, -80%) rotate(-1deg);
-            -o-transform: translate(0, -80%) rotate(-1deg);
-            transform: translate(0, -80%) rotate(-1deg);
+            -webkit-transform: translate(0, -80%);
+            -moz-transform: translate(0, -80%);
+            -ms-transform: translate(0, -80%);
+            -o-transform: translate(0, -80%);
+            transform: translate(0, -80%);
             top: 0;
+        }
+        .event--repost {
+            -webkit-transform: translate(50%, -50%);
+            -moz-transform: translate(50%, -50%);
+            -ms-transform: translate(50%, -50%);
+            -o-transform: translate(50%, -50%);
+            transform: translate(50%, -50%);
+        }
+    }
+    .posters--event:nth-child(3n+1) {
+        -webkit-transform: translate(0, -50%) rotate(-2deg);
+        -moz-transform: translate(0, -50%) rotate(-2deg);
+        -ms-transform: translate(0, -50%) rotate(-2deg);
+        -o-transform: translate(0, -50%) rotate(-2deg);
+        transform: translate(0, -50%) rotate(-2deg);
+        -webkit-backface-visibility: hidden;
+        &.hide {
+            -webkit-transform: translate(0, -80%);
+            -moz-transform: translate(0, -80%);
+            -ms-transform: translate(0, -80%);
+            -o-transform: translate(0, -80%);
+            transform: translate(0, -80%);
+            top: 0;
+        }
+        .event--repost {
+            -webkit-transform: translate(50%, -50%);
+            -moz-transform: translate(50%, -50%);
+            -ms-transform: translate(50%, -50%);
+            -o-transform: translate(50%, -50%);
+            transform: translate(50%, -50%);
+        }
+    }
+    .posters--event:nth-child(3n+2) {
+        -webkit-transform: translate(0, -50%)  rotate(1.5deg);
+        -moz-transform: translate(0, -50%)  rotate(1.5deg);
+        -ms-transform: translate(0, -50%)  rotate(1.5deg);
+        -o-transform: translate(0, -50%)  rotate(1.5deg);
+        transform: translate(0, -50%)  rotate(1.5deg);
+        -webkit-backface-visibility: hidden;
+        &.hide {
+            -webkit-transform: translate(0, -80%);
+            -moz-transform: translate(0, -80%);
+            -ms-transform: translate(0, -80%);
+            -o-transform: translate(0, -80%);
+            transform: translate(0, -80%);
+            top: 0;
+        }
+        .event--repost {
+            -webkit-transform: translate(50%, -50%);
+            -moz-transform: translate(50%, -50%);
+            -ms-transform: translate(50%, -50%);
+            -o-transform: translate(50%, -50%);
+            transform: translate(50%, -50%);
         }
     }
 }

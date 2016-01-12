@@ -12,6 +12,9 @@
     </div>
 </div>
 <div class="gigs--posters">
+    <div class="posters--repost">
+        <%= image_tag 'repost_2x.png', alt: 'repost' %>
+    </div>
     <% @gigs.each_with_index do |gig, index| %>
         <% if index == (@gigs.count - 1) %>
             <div class="posters--event top">

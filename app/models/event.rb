@@ -1,6 +1,7 @@
 class Event < ActiveRecord::Base
     belongs_to :venue
     has_and_belongs_to_many :bands
+    has_many :reposts
     
     # This method associates the attribute ":avatar" with a file attachment
     has_attached_file :poster, styles: {

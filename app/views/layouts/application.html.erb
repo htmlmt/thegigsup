@@ -16,18 +16,28 @@
 <header class="body--header">
     <div class="header--container">
         <div class="header--logo">
-            <a href="/"><%= image_tag('header-logo.png') %></a>
+            <a href="/">
+                <%= image_tag('header-logo_2x.png') %>
+            </a>
         </div>
-        <nav class="header--nav">
-            <div class="nav--link">
-                <a href="/">Gigs</a>
-            </div>
-            <div class="nav--link">
-                <a href="/calendar">Calendar</a>
-            </div>
-        </nav>
+        <div class="header--social">
+            <a href="http://facebook.com/thegigsup" target="_blank">
+                <%= image_tag('facebook_2x.png') %>
+            </a>
+            <a href="http://twitter.com/thegigsup" target="_blank">
+                <%= image_tag('twitter_2x.png') %>
+            </a>
+        </div>
     </div>
 </header>
+<nav class="body--nav">
+    <div class="nav--link">
+        <a href="/">Gigs</a>
+    </div>
+    <div class="nav--link">
+        <a href="/calendar">Calendar</a>
+    </div>
+</nav>
 <%= yield %>
 </body>
 </html>
