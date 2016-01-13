@@ -1,7 +1,9 @@
 Rails.application.routes.draw do
   resources :reposts
   resources :bands
+  get 'bands/:id/:month/:year' => 'bands#show'
   resources :venues
+  get 'venues/:id/:month/:year' => 'venues#show'
   resources :events do
       get :autocomplete_venue_name, :on => :collection
       get :autocomplete_band_name, :on => :collection

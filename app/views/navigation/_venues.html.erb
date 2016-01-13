@@ -1,0 +1,49 @@
+<nav class="events--navigation">
+    <a href="/events">
+        <div class="navigation--back">
+            <div class="back--arrow">
+                <%= image_tag('white-arrow.png') %>
+            </div>
+            <div class="back--text">
+                Back
+            </div>
+        </div>
+    </a>
+    <div class="navigation--months">
+        <% if @month.strftime("%B") == Date.today.strftime("%B") %>
+            <div class="months--month months--current">
+                <div class="current--text">
+                    <%= @month.strftime("%B") %> 
+                </div>
+            </div>
+            <div class="months--month">
+                <%= link_to (@month + 1.month).strftime("%B"), '/venues/' + @venue.slug + '/' + (@month + 1.month).strftime("%B").downcase + '/' + (@month + 1.month).strftime("%Y") %>
+            </div>
+            <div class="months--month">
+                <%= link_to (@month + 2.months).strftime("%B"), '/venues/' + @venue.slug + '/' + (@month + 2.months).strftime("%B").downcase + '/' + (@month + 2.months).strftime("%Y") %>
+            </div>
+        <% else %>
+            <div class="months--month">
+                <%= link_to (@month - 1.month).strftime("%B"), '/venues/' + @venue.slug + '/' + (@month - 1.month).strftime("%B").downcase + '/' + (@month - 1.month).strftime("%Y") %>
+            </div>
+            <div class="months--month months--current">
+                <div class="current--text">
+                    <%= @month.strftime("%B") %> 
+                </div>
+            </div>
+            <div class="months--month">
+                <%= link_to (@month + 1.month).strftime("%B"), '/venues/' + @venue.slug + '/' + (@month + 1.month).strftime("%B").downcase + '/' + (@month + 1.month).strftime("%Y") %>
+            </div>
+        <% end %>
+    </div>
+    <div class="navigation--add">
+        <a href="/events/new">
+            <div class="add--text">
+                Add an event
+            </div>
+            <div class="add--plus">
+                <%= image_tag('white-plus.png') %>
+            </div>
+        </a>
+    </div>
+</nav>

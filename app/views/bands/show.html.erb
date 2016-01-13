@@ -1,79 +1,56 @@
-<div class="events--list">
-    <div class="list--month">
-        <div class="month--container">
-            <div class="month--names">
-                <h1><%= @dates.first.strftime("%^B") %></h1>
-            </div>
-            <div class="month--add">
-                <h1><a href="/events/new">ADD EVENT</a></h1>
-            </div>
-        </div>
-    </div>
-    <% if @dates.count == 0 %>
-        <div class="list--day">
-            <div class="day--number">
-            </div>
-            <div class="day--info">
-                <div class="info--container">
-                    <div class="info--title">
-                        <h2>No events listed.</h2>
-                    </div>
+<div class="body--events">
+    <%= render "navigation/bands" %>
+    <div class="events--list">
+        <% if @dates.count == 0 %>
+            <div class="list--day">
+                <div class="day--number">
                 </div>
-            </div>
-        </div>
-    <% end %>
-    <% months = [] %>
-    <% @dates.each do |date| %>
-        <% if @dates.first.strftime("%^B") != date.strftime("%^B") %>
-            <% unless months.include? date.strftime("%^B") %>
-                <div class="list--month">
-                    <div class="month--container">
-                        <div class="month--names">
-                            <h1><%= date.strftime("%^B") %></h1>
-                        </div>
-                        <div class="month--add">
-                            
-                        </div>
-                    </div>
-                </div>
-                <% months << date.strftime("%^B") %>
-            <% end %>
-        <% end %>
-        <div class="list--day">
-            <div class="day--number">
-                <h4><%= date.strftime("%e") %></h4>
-                <p><%= date.strftime("%a") %></p>
-            </div>
-            <div class="day--info">
-                <% events = @band.events.where('start BETWEEN ? AND ?', date, date.end_of_day).order(:start) %>
-                <% events.each do |event| %>
+                <div class="day--info">
                     <div class="info--container">
                         <div class="info--title">
-                            <h2>
-                                <% event.bands.each do |band| %>
-                                    <%= link_to band.name, band_path(band) %><br>
-                                <% end %>
-                            </h2>
-                            <%= link_to venue_path(event.venue) do %>
-                            <h3>
-                                <%= event.venue.name %>
-                                <div class="arrow">
-                                    <%= image_tag('arrow.png') %>
-                                </div>
-                            </h3>
-                            <% end %>
-                        </div>
-                        <div class="info--time">
-                            <p>
-                                <%= event.start.in_time_zone.strftime("%l:%M %P") %>
-                            </p>
-                            <div class="time--upload">
-                                <%= image_tag('upload-poster.png') %>
-                            </div>
+                            <h2>No events listed.</h2>
                         </div>
                     </div>
-                <% end %>
+                </div>
             </div>
-        </div>
-    <% end %>
+        <% end %>
+        <% @dates.each do |date| %>
+            <div class="list--day">
+                <div class="day--number">
+                    <h4><%= date.strftime("%e") %></h4>
+                    <p><%= date.strftime("%a") %></p>
+                </div>
+                <div class="day--info">
+                    <% events = @band.events.where('start BETWEEN ? AND ?', date, date.end_of_day).order(:start) %>
+                    <% events.each do |event| %>
+                        <div class="info--container">
+                            <div class="info--title">
+                                <h2>
+                                    <% event.bands.each do |band| %>
+                                        <%= link_to band.name, band_path(band) %><br>
+                                    <% end %>
+                                </h2>
+                                <%= link_to venue_path(event.venue) do %>
+                                <h3>
+                                    <%= event.venue.name %>
+                                    <div class="arrow">
+                                        <%= image_tag('arrow.png') %>
+                                    </div>
+                                </h3>
+                                <% end %>
+                            </div>
+                            <div class="info--time">
+                                <p>
+                                    <%= event.start.in_time_zone.strftime("%l:%M %P") %>
+                                </p>
+                                <div class="time--upload">
+                                    <%= image_tag('upload-poster.png') %>
+                                </div>
+                            </div>
+                        </div>
+                    <% end %>
+                </div>
+            </div>
+        <% end %>
+    </div>
 </div>

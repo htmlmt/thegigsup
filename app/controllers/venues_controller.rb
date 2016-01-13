@@ -10,13 +10,23 @@ class VenuesController < ApplicationController
   # GET /venues/1
   # GET /venues/1.json
   def show
-      events = Event.where(venue_id: @venue.id).order(:start)
+      events = @venue.events.order(:start)
+      
+      if params[:month] && params[:year]
+          dateString = params[:month] + ' ' + params[:year]
+          @month = Time.parse(dateString)
+          
+          events = @venue.events.where("start >= ? AND start <= ?", @month.beginning_of_month, Time.parse(dateString).end_of_month).order(:start)
+      else
+          @month = Time.now
+          events = @venue.events.where("start >= ? AND start <= ?", @month, Time.now.end_of_month).order(:start)
+      end
       
       @dates = []
   
       events.each do |event|
-          unless event.start == nil
-              unless @dates.include? event.start.beginning_of_day
+          unless @dates.include? event.start.beginning_of_day
+              if event.start >= Time.now
                   @dates << event.start.beginning_of_day
               end
           end
