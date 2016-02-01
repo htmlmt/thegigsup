@@ -31,8 +31,10 @@ class EventsController < ApplicationController
         
         events.each do |event|
             event.bands.each do |band|
-                if band.tags.include? params[:tag].gsub('-', ' ')
-                    tag_events << event
+                if band.tags != nil
+                    if band.tags.include? params[:tag].gsub('-', ' ')
+                        tag_events << event
+                    end
                 end
             end
         end
