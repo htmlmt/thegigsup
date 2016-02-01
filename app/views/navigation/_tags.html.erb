@@ -1,7 +1,15 @@
 <nav class="events--navigation">
-    <div class="navigation--back-space">
-        
-    </div>
+    <% back_link = '/events/' + @month.strftime("%B/%Y").downcase %>
+    <a href="<%= back_link %>">
+        <div class="navigation--back">
+            <div class="back--arrow">
+                <%= image_tag('white-arrow.png') %>
+            </div>
+            <div class="back--text">
+                See all events
+            </div>
+        </div>
+    </a>
     <div class="navigation--months">
         <% if @month.strftime("%B") == Date.today.strftime("%B") %>
             <div class="months--month months--current">
