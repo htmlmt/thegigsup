@@ -17,7 +17,7 @@
                 <p>
                     <% @band.similars.each_with_index do |band, index| %>
                         <% band_record = Band.find_by_songkick_id(band) %>
-                        <% shows = band_record.events %>
+                        <% shows = band_record.events.where("start >= ?", DateTime.now) %>
                         <% puts shows %>
                         <% band_link = '/bands/' + band_record.slug %>
                         <% if index != 0 %>
