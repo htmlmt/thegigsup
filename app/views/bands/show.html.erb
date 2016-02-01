@@ -20,9 +20,11 @@
                         <% band_record = Band.find_by_songkick_id(band) %>
                         <% shows = band_record.events.where("start >= ?", DateTime.now).order(:start) %>
                         <% same_show = false %>
-                        <% shows[0].bands.each do |band| %>
-                            <% if band.id == band_record.id %>
-                                <% same_show = true %>
+                        <% if shows.count != 0 %>
+                            <% shows[0].bands.each do |band| %>
+                                <% if band.id == band_record.id %>
+                                    <% same_show = true %>
+                                <% end %>
                             <% end %>
                         <% end %>
                         <% band_link = '/bands/' + band_record.slug %>
