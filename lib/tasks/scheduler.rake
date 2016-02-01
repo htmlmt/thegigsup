@@ -66,10 +66,12 @@ namespace :events do
                     else
                         @venue = Venue.find_by songkick_id: event["venue"]["id"].to_i
                     end
+                    
+                    event_start = DateTime.parse(event["start"]["datetime"]).in_time_zone
                 
                     @event = Event.new(
                         songkick_id: event["id"].to_i,
-                        start: DateTime.parse(event["start"]["datetime"]).in_time_zone
+                        start: event_start
                     )
                 
                     @event.save
