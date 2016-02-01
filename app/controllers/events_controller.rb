@@ -46,6 +46,8 @@ class EventsController < ApplicationController
                 end
             end
         end
+        
+        @tag = params[:tag]
     end
 
     # GET /events

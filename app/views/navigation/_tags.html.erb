@@ -18,14 +18,14 @@
                 </div>
             </div>
             <div class="months--month">
-                <%= link_to (@month + 1.month).strftime("%B"), '/tags/' + (@month + 1.month).strftime("%B").downcase + '/' + (@month + 1.month).strftime("%Y") %>
+                <%= link_to (@month + 1.month).strftime("%B"), '/tags/' + @tag + '/' + (@month + 1.month).strftime("%B").downcase + '/' + (@month + 1.month).strftime("%Y") %>
             </div>
             <div class="months--month">
-                <%= link_to (@month + 2.months).strftime("%B"), '/tags/' + (@month + 2.months).strftime("%B").downcase + '/' + (@month + 2.months).strftime("%Y") %>
+                <%= link_to (@month + 2.months).strftime("%B"), '/tags/' + @tag + '/' + (@month + 2.months).strftime("%B").downcase + '/' + (@month + 2.months).strftime("%Y") %>
             </div>
         <% else %>
             <div class="months--month">
-                <%= link_to (@month - 1.month).strftime("%B"), '/tags/' + (@month - 1.month).strftime("%B").downcase + '/' + (@month - 1.month).strftime("%Y") %>
+                <%= link_to (@month - 1.month).strftime("%B"), '/tags/' + @tag + '/' + (@month - 1.month).strftime("%B").downcase + '/' + (@month - 1.month).strftime("%Y") %>
             </div>
             <div class="months--month months--current">
                 <div class="current--text">
@@ -33,7 +33,7 @@
                 </div>
             </div>
             <div class="months--month">
-                <%= link_to (@month + 1.month).strftime("%B"), '/tags/' + (@month + 1.month).strftime("%B").downcase + '/' + (@month + 1.month).strftime("%Y") %>
+                <%= link_to (@month + 1.month).strftime("%B"), '/tags/' + @tag + '/' + (@month + 1.month).strftime("%B").downcase + '/' + (@month + 1.month).strftime("%Y") %>
             </div>
         <% end %>
     </div>
