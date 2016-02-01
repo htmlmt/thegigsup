@@ -18,9 +18,15 @@
                     <% bands_with_shows = 0 %>
                     <% @band.similars.each_with_index do |band, index| %>
                         <% band_record = Band.find_by_songkick_id(band) %>
-                        <% shows = band_record.events.where("start >= ?", DateTime.now).where(bands: band_record.id).order(:start) %>
+                        <% shows = band_record.events.where("start >= ?", DateTime.now).order(:start) %>
+                        <% same_show = false %>
+                        <% shows[0].bands.each do |band| %>
+                            <% if band.id == band_record.id %>
+                                <% same_show = true %>
+                            <% end %>
+                        <% end %>
                         <% band_link = '/bands/' + band_record.slug %>
-                        <% if shows.count != 0 %>
+                        <% if shows.count != 0 && same_show == false %>
                             <% if bands_with_shows != 0 %>
                                 <br><br>
                             <% else %>
@@ -36,7 +42,7 @@
                 <p>
                     <% @band.similars.each_with_index do |band, index| %>
                         <% band_record = Band.find_by_songkick_id(band) %>
-                        <% shows = band_record.events.where("start >= ?", DateTime.now).where.not(bands: band_record.id).order(:start) %>
+                        <% shows = band_record.events.where("start >= ?", DateTime.now).order(:start) %>
                         <% band_link = '/bands/' + band_record.slug %>
                         <% if index != 0 %>
                             | 
