@@ -35,11 +35,6 @@ namespace :bands do
             end
         end
         
-            if i == 19
-                Band.find(n + 20).update(songkick_id: 1)
-            end
-        end
-        
         puts "Similar artists found.\n"
     end
 end
