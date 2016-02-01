@@ -1,5 +1,6 @@
 <nav class="events--navigation">
-    <a href="/events">
+    <% back_link = '/events/' + @month.strftime("%B/%Y").downcase %>
+    <a href="<%= back_link %>">
         <div class="navigation--back">
             <div class="back--arrow">
                 <%= image_tag('white-arrow.png') %>

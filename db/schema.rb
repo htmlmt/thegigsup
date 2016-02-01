@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160108032300) do
+ActiveRecord::Schema.define(version: 20160201015341) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -19,11 +19,15 @@ ActiveRecord::Schema.define(version: 20160108032300) do
   create_table "bands", force: :cascade do |t|
     t.string   "name"
     t.string   "website"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
     t.integer  "songkick_id"
     t.integer  "event_id"
     t.string   "slug"
+    t.text     "description"
+    t.string   "twitter"
+    t.string   "tags",        default: [],              array: true
+    t.integer  "similars",    default: [],              array: true
   end
 
   add_index "bands", ["slug"], name: "index_bands_on_slug", unique: true, using: :btree
@@ -76,10 +80,12 @@ ActiveRecord::Schema.define(version: 20160108032300) do
     t.string   "website"
     t.float    "longitude"
     t.float    "latitude"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
     t.integer  "songkick_id"
     t.string   "slug"
+    t.text     "description"
+    t.string   "links",       default: [],              array: true
   end
 
   add_index "venues", ["slug"], name: "index_venues_on_slug", unique: true, using: :btree

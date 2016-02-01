@@ -1,3 +1,45 @@
-// Place all the styles related to the Bands controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: http://sass-lang.com/
+.events--band-container {
+    @include flexbox();
+    .events--band {
+        margin: 3.5rem auto;
+        width: 50%;
+        max-width: 600px;
+        .band--name {
+            margin-bottom: 1rem;
+        }
+    }
+    .events--list {
+        width: 50%;
+    }
+    .links--address {
+        @include flexbox();
+        @include flexbox-align-items(center);
+        border-bottom: .2rem solid #cccccc;
+        .address--icon {
+            padding: 1rem;
+            width: 80px;
+            margin-right: 1rem;
+            border-right: .2rem solid #cccccc;
+        }
+    }
+    .band--links {
+        background-color: $siteCalendarGrey;
+    }
+    .links--website {
+        @include flexbox();
+        @include flexbox-align-items(center);
+        border-bottom: .2rem solid #cccccc;
+        .website--icon {
+            padding: 1rem;
+            width: 80px;
+            margin-right: 1rem;
+            border-right: .2rem solid #cccccc;
+        }
+    }
+    .band--name {
+        margin-bottom: 1rem;
+        h2 {
+            color: $siteBlack;
+        }
+    }
+}

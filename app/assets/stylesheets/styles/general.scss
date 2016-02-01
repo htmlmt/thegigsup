@@ -17,3 +17,9 @@ body > div {
     overflow: scroll;
     -webkit-overflow-scrolling: touch;
 }
+
+a,
+a:visited,
+a:hover {
+    color: $siteBlack;
+}

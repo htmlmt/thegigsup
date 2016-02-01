@@ -1,51 +1,106 @@
 <div class="body--events">
     <%= render "navigation/venues" %>
-    <div class="events--list">
-        <% if @dates.count == 0 %>
-            <div class="list--day">
-                <div class="day--number">
-                </div>
-                <div class="day--info">
-                    <div class="info--container">
-                        <div class="info--title">
-                            <h2>No events listed.</h2>
+    <div class="events--venue-container">
+        <div class="events--venue">
+            <div class="venue--name">
+                <h2><%= @venue.name %></h2>
+            </div>
+            <div class="venue--description">
+                <p><%= @venue.description %></p>
+            </div>
+            <div class="venue--links">
+                <% map_link = "http://maps.google.com/?q=" + @venue.name + "+" + @venue.city %>
+                <a href="<%= map_link %>" target="_blank">
+                    <div class="links--address">
+                        <div class="address--icon">
+                            <%= image_tag('place-icon.png') %>
+                        </div>
+                        <div class="address--text">
+                            <p><%= @venue.street %><br>
+                            <p><%= @venue.city %></p>
                         </div>
                     </div>
-                </div>
-            </div>
-        <% end %>
-        <% @dates.each do |date| %>
-            <div class="list--day">
-                <div class="day--number">
-                    <h4><%= date.strftime("%e") %></h4>
-                    <p><%= date.strftime("%a") %></p>
-                </div>
-                <div class="day--info">
-                    <% events = Event.where(venue_id: @venue.id).where('start BETWEEN ? AND ?', date, date.end_of_day).order(:start) %>
-                    <% events.each do |event| %>
-                        <div class="info--container">
-                            <div class="info--title">
-                                <h2>
-                                    <% event.bands.each do |band| %>
-                                        <%= link_to band.name, band_path(band) %><br>
-                                    <% end %>
-                                </h2>
-                                <h3>
-                                    <%= event.venue.name %>
-                                </h3>
+                </a>
+                <% if @venue.website %>
+                    <a href="<%= @venue.website %>">
+                        <div class="links--website">
+                            <div class="website--icon">
+                            
                             </div>
-                            <div class="info--time">
-                                <p>
-                                    <%= event.start.in_time_zone.strftime("%l:%M %P") %>
-                                </p>
-                                <div class="time--upload">
-                                    <%= image_tag('upload-poster.png') %>
-                                </div>
+                            <div class="website--text">
+                                <% website = @venue.website %>
+                                <% website.sub!(/https\:\/\/www./, '') if website.include? "https://www." %>
+                                <% website.sub!(/http\:\/\/www./, '')  if website.include? "http://www." %>
+                                <% website.sub!(/www./, '')            if website.include? "www." %>
+                                <p><%= website %></p>
                             </div>
                         </div>
-                    <% end %>
-                </div>
+                    </a>
+                <% end %>
             </div>
-        <% end %>
+        </div>
+        <div class="events--list">
+            <% if @dates.count == 0 %>
+                <div class="list--empty">
+                    <div class="empty--container">
+                        <div class="empty--message">
+                            <h4><%= @venue.name %> has no events listed in <%= @month.strftime("%B") %>.</h4>
+                        </div>
+                        <a href="/events/new">
+                            <div class="empty--add">
+                                Add an event
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            <% end %>
+            <% @dates.each do |date| %>
+                <div class="list--day">
+                    <div class="day--number">
+                        <h3><%= date.strftime("%e") %></h3>
+                        <h4><%= date.strftime("%a") %></h4>
+                    </div>
+                    <div class="day--info">
+                        <% events = Event.where(venue_id: @venue.id).where('start BETWEEN ? AND ?', date, date.end_of_day).order(:start) %>
+                        <% events.each do |event| %>
+                            <div class="info--container">
+                                <div class="info--bands">
+                                    <% event.bands.each do |band| %>
+                                        <% bands_link = '/bands/' + band.slug + '/' + @month.strftime("%B/%Y").downcase %>
+                                        <%= link_to bands_link do %>
+                                            <div class="bands--name">
+                                                <h2><%= band.name %></h2>
+                                            </div>
+                                            <div class="bands--arrow">
+                                                <%= image_tag('arrow-white.png') %>
+                                            </div>
+                                        <% end %>
+                                    <% end %>
+                                </div>
+                                <div class="info--venue">
+                                    <% venue_link = '/venues/' + event.venue.slug + '/' + @month.strftime("%B/%Y").downcase %>
+                                    <%= link_to venue_link do %>
+                                        <div class="venue--title">
+                                            <p><%= event.venue.name %></p>
+                                        </div>
+                                        <div class="venue--arrow">
+                                            <%= image_tag('arrow.png') %>
+                                        </div>
+                                    <% end %>
+                                </div>
+                                <div class="info--time">
+                                    <p class="time--time">
+                                        <%= event.start.in_time_zone.strftime("%l:%M %P") %>
+                                    </p>
+                                    <div class="time--upload">
+                                        <%= image_tag('upload-poster.png') %>
+                                    </div>
+                                </div>
+                            </div>
+                        <% end %>
+                    </div>
+                </div>
+            <% end %>
+        </div>
     </div>
 </div>

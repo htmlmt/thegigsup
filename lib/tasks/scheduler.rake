@@ -57,7 +57,9 @@ namespace :events do
                             zip: venueJSON["zip"].to_i,
                             latitude: venueJSON["lat"].to_f,
                             longitude: venueJSON["lng"].to_f,
-                            street: venueJSON["street"]
+                            street: venueJSON["street"],
+                            website: venueJSON["website"],
+                            description: venueJSON["description"]
                         )
                     
                         @venue.save

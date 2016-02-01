@@ -16,6 +16,38 @@ class EventsController < ApplicationController
             end
         end
     end
+    
+    def tags
+        if params[:month] && params[:year]
+            dateString = params[:month] + ' ' + params[:year]
+            @month = Time.parse(dateString)
+            
+            events = Event.where("start >= ? AND start <= ?", @month.beginning_of_month, Time.parse(dateString).end_of_month).order(:start)
+        else
+            @month = Time.now
+            events = Event.where("start >= ? AND start <= ?", @month, Time.now.end_of_month).order(:start)
+        end
+        
+        tag_events = []
+        
+        events.each do |event|
+            event.bands.each do |band|
+                if band.tags.include? params[:tag]
+                    tag_events << event
+                end
+            end
+        end
+        
+        @dates = []
+    
+        tag_events.each do |event|
+            unless @dates.include? event.start.beginning_of_day
+                if event.start >= Time.now
+                    @dates << event.start.beginning_of_day
+                end
+            end
+        end
+    end
 
     # GET /events
     # GET /events.json

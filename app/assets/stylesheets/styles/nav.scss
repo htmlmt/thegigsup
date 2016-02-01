@@ -4,6 +4,8 @@
     @include flexbox-justify-content(space-between);
     width: 11rem;
     margin: 0 auto;
+    position: relative;
+    z-index: 200;
 }
 
 .nav--link {
@@ -41,6 +43,8 @@
     @include flexbox-justify-content(space-between);
     background-color: $siteGrey;
     border-bottom: 5px solid $siteLightestGrey;
+    position: relative;
+    z-index: 300;
     .navigation--back-space {
         width: 120px;
     }
