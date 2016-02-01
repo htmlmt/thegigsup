@@ -14,20 +14,20 @@ class BandsController < ApplicationController
       
       if params[:month] && params[:year]
           dateString = params[:month] + ' ' + params[:year]
-          @month = Time.parse(dateString)
+          @month = Time.parse(dateString).in_time_zone
           
-          events = @band.events.where("start >= ? AND start <= ?", @month.beginning_of_month, Time.parse(dateString).end_of_month).order(:start)
+          events = @band.events.where("start >= ? AND start <= ?", @month.beginning_of_month, Time.parse(dateString).in_time_zone.end_of_month).order(:start)
       else
-          @month = Time.now
-          events = @band.events.where("start >= ? AND start <= ?", @month, Time.now.end_of_month).order(:start)
+          @month = Time.now.in_time_zone
+          events = @band.events.where("start >= ? AND start <= ?", @month, Time.now.in_time_zone.end_of_month).order(:start)
       end
       
       @dates = []
   
       events.each do |event|
-          unless @dates.include? event.start.beginning_of_day
-              if event.start >= Time.now
-                  @dates << event.start.beginning_of_day
+          unless @dates.include? event.start.in_time_zone.beginning_of_day
+              if event.start >= Time.now.in_time_zone
+                  @dates << event.start.in_time_zone.beginning_of_day
               end
           end
       end

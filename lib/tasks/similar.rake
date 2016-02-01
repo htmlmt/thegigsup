@@ -5,7 +5,7 @@ namespace :bands do
         n = Band.where(songkick_id: 1).id
         
         20.times do |i|
-            looped_band = Band.find(i + n)
+            looped_band = Band.find(i + 21)
             
             similarCall = "http://developer.echonest.com/api/v4/artist/similar?api_key=" + ENV["ECHO_API_KEY"] + '&id=songkick:artist:' + looped_band.songkick_id.to_s + '&bucket=id:songkick&format=json'
 
@@ -33,7 +33,8 @@ namespace :bands do
 
                 looped_band.update(similars: songkick_ids)
             end
-            
+        end
+        
             if i == 19
                 Band.find(n + 20).update(songkick_id: 1)
             end
