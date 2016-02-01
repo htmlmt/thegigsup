@@ -20,7 +20,7 @@ class EventsController < ApplicationController
     def tags
         if params[:month] && params[:year]
             dateString = params[:month] + ' ' + params[:year]
-            @month = Time.parse(dateString)
+            @month = Time.zone.parse(dateString)
             events = Event.where("start >= ? AND start <= ?", @month, @month.end_of_month).order(:start)
         else
             @month = Time.current
@@ -53,7 +53,7 @@ class EventsController < ApplicationController
     def index
         if params[:month] && params[:year]
             dateString = params[:month] + ' ' + params[:year]
-            @month = Time.parse(dateString)
+            @month = Time.zone.parse(dateString)
             events = Event.where("start >= ? AND start <= ?", @month, @month.end_of_month).order(:start)
         else
             @month = Time.current
