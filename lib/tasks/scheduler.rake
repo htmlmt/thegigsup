@@ -69,7 +69,7 @@ namespace :events do
                 
                     @event = Event.new(
                         songkick_id: event["id"].to_i,
-                        start: Time.zone.parse(event["start"]["datetime"])
+                        start: event["start"]["datetime"]
                     )
                 
                     @event.save
