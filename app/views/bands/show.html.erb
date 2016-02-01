@@ -7,13 +7,14 @@
             </div>
             <div class="band--tags">
                 <p>
-                    <strong>TAGS:</strong>
+                    <strong>TAGS:</strong><br>
                     <% @band.tags.each_with_index do |tag, index| %>
                         <% tag_link = "/tags/" + tag %>
                         <% if index != 0 %>| <% end %><%= link_to tag, tag_link.gsub(' ', '-') %>
                     <% end %>
                 </p>
             </div>
+            <br>
             <div class="band--similars">
                 <p>
                     <% bands_with_shows = 0 %>
