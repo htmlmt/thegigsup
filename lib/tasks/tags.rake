@@ -3,7 +3,7 @@ namespace :bands do
         puts "Finding tags...\n"
         
         20.times do |i|
-            looped_band = Band.find(i + 1)
+            looped_band = Band.find(i + 38)
             
             termsCall = "http://developer.echonest.com/api/v4/artist/terms?api_key=" + ENV["ECHO_API_KEY"] + '&id=songkick:artist:' + looped_band.songkick_id.to_s + '&format=json'
 
@@ -12,16 +12,18 @@ namespace :bands do
             echo_terms.perform
 
             echo_terms_info = JSON.parse(echo_terms.body_str)
+            
+            if echo_terms_info["response"]["status"]["code"] == 0
+                terms_response = echo_terms_info["response"]["terms"]
 
-            terms_response = echo_terms_info["response"]["terms"]
+                terms = []
+            
+                terms_response.each do |term|
+                    terms.push(term["name"])
+                end
 
-            terms = []
-
-            terms_response.each do |term|
-                terms.push(term["name"])
+                looped_band.update(tags: terms)
             end
-
-            looped_band.update(tags: terms)
         end
         
         puts "Tags found.\n"

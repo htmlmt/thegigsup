@@ -24,40 +24,50 @@
                 <div class="day--info">
                     <% events = Event.where('start BETWEEN ? AND ?', date.beginning_of_day, date.end_of_day).order(:start) %>
                     <% events.each do |event| %>
-                        <div class="info--container">
-                            <div class="info--bands">
-                                <% event.bands.each do |band| %>
-                                    <% bands_link = '/bands/' + band.slug + '/' + @month.strftime("%B/%Y").downcase %>
-                                    <%= link_to bands_link do %>
-                                        <div class="bands--name">
-                                            <h2><%= band.name %></h2>
+                        <% tag_applies = false %>
+                        <% events.bands.each do |band| %>
+                            <% band.tags.each do |tag| %>
+                                <% if tag.gsub('-', ' ') == @tag %>
+                                    <% tag_applies = true %>
+                                <% end %>
+                            <% end %>
+                        <% end %>
+                        <% if tag_applies == true %>
+                            <div class="info--container">
+                                <div class="info--bands">
+                                    <% event.bands.each do |band| %>
+                                        <% bands_link = '/bands/' + band.slug + '/' + @month.strftime("%B/%Y").downcase %>
+                                        <%= link_to bands_link do %>
+                                            <div class="bands--name">
+                                                <h2><%= band.name %></h2>
+                                            </div>
+                                            <div class="bands--arrow">
+                                                <%= image_tag('arrow-white.png') %>
+                                            </div>
+                                        <% end %>
+                                    <% end %>
+                                </div>
+                                <div class="info--venue">
+                                    <% venue_link = '/venues/' + event.venue.slug + '/' + @month.strftime("%B/%Y").downcase %>
+                                    <%= link_to venue_link do %>
+                                        <div class="venue--title">
+                                            <p><%= event.venue.name %></p>
                                         </div>
-                                        <div class="bands--arrow">
-                                            <%= image_tag('arrow-white.png') %>
+                                        <div class="venue--arrow">
+                                            <%= image_tag('arrow.png') %>
                                         </div>
                                     <% end %>
-                                <% end %>
-                            </div>
-                            <div class="info--venue">
-                                <% venue_link = '/venues/' + event.venue.slug + '/' + @month.strftime("%B/%Y").downcase %>
-                                <%= link_to venue_link do %>
-                                    <div class="venue--title">
-                                        <p><%= event.venue.name %></p>
+                                </div>
+                                <div class="info--time">
+                                    <p class="time--time">
+                                        <%= event.start.in_time_zone.strftime("%l:%M %P") %>
+                                    </p>
+                                    <div class="time--upload">
+                                        <%= image_tag('upload-poster.png') %>
                                     </div>
-                                    <div class="venue--arrow">
-                                        <%= image_tag('arrow.png') %>
-                                    </div>
-                                <% end %>
-                            </div>
-                            <div class="info--time">
-                                <p class="time--time">
-                                    <%= event.start.in_time_zone.strftime("%l:%M %P") %>
-                                </p>
-                                <div class="time--upload">
-                                    <%= image_tag('upload-poster.png') %>
                                 </div>
                             </div>
-                        </div>
+                        <% end %>
                     <% end %>
                 </div>
             </div>
