@@ -14,9 +14,9 @@ class VenuesController < ApplicationController
       
       if params[:month] && params[:year]
           dateString = params[:month] + ' ' + params[:year]
-          @month = Time.parse(dateString).in_time_zone
+          @month = Time.parse(dateString)
           
-          events = @venue.events.where("start >= ? AND start <= ?", @month.beginning_of_month, Time.parse(dateString).in_time_zone.end_of_month).order(:start)
+          events = @venue.events.where("start >= ? AND start <= ?", @month.beginning_of_month.in_time_zone, @month.end_of_month.in_time_zone).order(:start)
       else
           @month = Time.now.in_time_zone
           events = @venue.events.where("start >= ? AND start <= ?", @month, Time.now.in_time_zone.end_of_month).order(:start)
