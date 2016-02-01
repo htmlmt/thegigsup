@@ -26,7 +26,9 @@
                             <% else %>
                                 <strong>YOU MIGHT ALSO GO SEE:</strong><br>
                             <% end %>
-                            <strong><%= link_to band_record.name, band_link + shows[0].start.strftime('%B').downcase + '/' + shows[0].start.strftime('%Y') %>, playing <%= shows[0].venue.name %> on <%= shows[0].start.strftime('%B %e') %></strong>
+                            <%= link_to band_link + shows[0].start.strftime('%B').downcase + '/' + shows[0].start.strftime('%Y') do %>
+                                <%= band_record.name %>, playing <%= shows[0].venue.name %> on <%= shows[0].start.strftime('%B %e') %>
+                            <% end %>
                         <% end %>
                     <% end %>
                     <br>
