@@ -17,7 +17,7 @@
                 <p>
                     <% @band.similars.each_with_index do |band, index| %>
                         <% band_record = Band.find_by_songkick_id(band) %>
-                        <% shows = band_record.events.where("start >= ?", DateTime.now) %>
+                        <% shows = band_record.events.where("start >= ?", DateTime.now).order(:start) %>
                         <% puts shows %>
                         <% band_link = '/bands/' + band_record.slug %>
                         <% if index != 0 %>
@@ -28,7 +28,7 @@
                         <% if shows.count == 0 %>
                             <%= link_to band_record.name, band_link %>
                         <% else %>
-                            <strong><%= link_to band_record.name, band_link %></strong>
+                            <strong><%= link_to band_record.name, band_link %>, playing <%= shows[0].venue.name %> on <%= shows[0].start.strftime('%B %e') %></strong>
                         <% end %>
                     <% end %>
                 </p>
