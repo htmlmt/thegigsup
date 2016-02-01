@@ -18,14 +18,13 @@
                     <% bands_with_shows = 0 %>
                     <% @band.similars.each_with_index do |band, index| %>
                         <% band_record = Band.find_by_songkick_id(band) %>
-                        <% shows = band_record.events.where("start >= ?", DateTime.now).order(:start) %>
-                        <% puts shows %>
+                        <% shows = band_record.events.where("start >= ?", DateTime.now).where.not(bands: band_record.id).order(:start) %>
                         <% band_link = '/bands/' + band_record.slug %>
                         <% if shows.count != 0 %>
                             <% if bands_with_shows != 0 %>
                                 <br><br>
                             <% else %>
-                                <strong>YOU MIGHT ALSO GO SEE:</strong><br>
+                                <strong>YOU MIGHT ENJOY SEEING:</strong><br>
                             <% end %>
                             <%= link_to band_link + shows[0].start.strftime('%B').downcase + '/' + shows[0].start.strftime('%Y') do %>
                                 <%= band_record.name %>, playing <%= shows[0].venue.name %> on <%= shows[0].start.strftime('%B %e') %>
@@ -37,8 +36,7 @@
                 <p>
                     <% @band.similars.each_with_index do |band, index| %>
                         <% band_record = Band.find_by_songkick_id(band) %>
-                        <% shows = band_record.events.where("start >= ?", DateTime.now).order(:start) %>
-                        <% puts shows %>
+                        <% shows = band_record.events.where("start >= ?", DateTime.now).where.not(bands: band_record.id).order(:start) %>
                         <% band_link = '/bands/' + band_record.slug %>
                         <% if index != 0 %>
                             | 
