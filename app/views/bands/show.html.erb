@@ -51,9 +51,7 @@
                         <% else %>
                             <strong>SIMILAR BANDS:</strong><br>
                         <% end %>
-                        <% if shows.count == 0 %>
-                            <%= link_to band_record.name, band_link %>
-                        <% end %>
+                        <%= link_to band_record.name, band_link %>
                     <% end %>
                 </p>
             </div>
