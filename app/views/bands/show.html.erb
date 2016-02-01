@@ -18,12 +18,18 @@
                     <% @band.similars.each_with_index do |band, index| %>
                         <% band_record = Band.find_by_songkick_id(band) %>
                         <% shows = band_record.events %>
+                        <% puts shows %>
                         <% band_link = '/bands/' + band_record.slug %>
                         <% if index != 0 %>
                             | 
                         <% else %>
                             <strong>SIMILAR BANDS:</strong><br>
-                        <% end %><%= link_to band_record.name, band_link %>
+                        <% end %>
+                        <% if shows.count == 0 %>
+                            <%= link_to band_record.name, band_link %>
+                        <% else %>
+                            <strong><%= link_to band_record.name, band_link %></strong>
+                        <% end %>
                     <% end %>
                 </p>
             </div>
