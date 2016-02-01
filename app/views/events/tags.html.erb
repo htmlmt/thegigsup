@@ -25,9 +25,9 @@
                     <% events = Event.where('start BETWEEN ? AND ?', date.beginning_of_day, date.end_of_day).order(:start) %>
                     <% events.each do |event| %>
                         <% tag_applies = false %>
-                        <% events.bands.each do |band| %>
+                        <% event.bands.each do |band| %>
                             <% band.tags.each do |tag| %>
-                                <% if tag.gsub('-', ' ') == @tag %>
+                                <% if tag.gsub(' ', '-') == @tag %>
                                     <% tag_applies = true %>
                                 <% end %>
                             <% end %>
