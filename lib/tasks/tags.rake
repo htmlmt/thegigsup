@@ -3,7 +3,7 @@ namespace :bands do
         puts "Finding tags...\n"
         
         20.times do |i|
-            looped_band = Band.find(i + 38)
+            looped_band = Band.find(i + 41)
             
             termsCall = "http://developer.echonest.com/api/v4/artist/terms?api_key=" + ENV["ECHO_API_KEY"] + '&id=songkick:artist:' + looped_band.songkick_id.to_s + '&format=json'
 

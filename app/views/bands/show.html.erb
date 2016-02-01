@@ -81,6 +81,18 @@
                         </div>
                     </a>
                 <% end %>
+                <% if @band.twitter %>
+                    <a href="https://twitter.com/<%= @band.twitter.downcase %>">
+                        <div class="links--website">
+                            <div class="website--icon">
+                                <%= image_tag('twitter.png') %>
+                            </div>
+                            <div class="website--text">
+                                <p>@<%= @band.twitter.downcase %></p>
+                            </div>
+                        </div>
+                    </a>
+                <% end %>
             </div>
         </div>
         <section class="events--list">
