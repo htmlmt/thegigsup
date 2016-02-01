@@ -21,11 +21,10 @@ class EventsController < ApplicationController
         if params[:month] && params[:year]
             dateString = params[:month] + ' ' + params[:year]
             @month = Time.parse(dateString)
-            
             events = Event.where("start >= ? AND start <= ?", @month, @month.end_of_month).order(:start)
         else
-            @month = Time.now
-            events = Event.where("start >= ? AND start <= ?", @month, Time.now.end_of_month).order(:start)
+            @month = Time.current
+            events = Event.where("start >= ? AND start <= ?", @month, @month.end_of_month).order(:start)
         end
         
         tag_events = []
@@ -55,11 +54,10 @@ class EventsController < ApplicationController
         if params[:month] && params[:year]
             dateString = params[:month] + ' ' + params[:year]
             @month = Time.parse(dateString)
-            
             events = Event.where("start >= ? AND start <= ?", @month, @month.end_of_month).order(:start)
         else
-            @month = Time.now
-            events = Event.where("start >= ? AND start <= ?", @month, Time.now.end_of_month).order(:start)
+            @month = Time.current
+            events = Event.where("start >= ? AND start <= ?", @month, @month.end_of_month).order(:start)
         end
         
         @dates = []
