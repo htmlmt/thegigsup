@@ -22,10 +22,10 @@ class EventsController < ApplicationController
             dateString = params[:month] + ' ' + params[:year]
             @month = Time.parse(dateString)
             
-            events = Event.where("start >= ? AND start <= ?", @month, @month.end_of_month).order(:start)
+            events = Event.where("start >= ? AND start <= ?", @month.in_time_zone, @month.end_of_month.in_time_zone).order(:start)
         else
-            @month = Time.now.in_time_zone
-            events = Event.where("start >= ? AND start <= ?", @month, Time.now.in_time_zone.end_of_month).order(:start)
+            @month = Time.now
+            events = Event.where("start >= ? AND start <= ?", @month.in_time_zone, Time.now.end_of_month.in_time_zone).order(:start)
         end
         
         tag_events = []
@@ -56,10 +56,10 @@ class EventsController < ApplicationController
             dateString = params[:month] + ' ' + params[:year]
             @month = Time.parse(dateString)
             
-            events = Event.where("start >= ? AND start <= ?", @month, @month.end_of_month).order(:start)
+            events = Event.where("start >= ? AND start <= ?", @month.in_time_zone, @month.end_of_month.in_time_zone).order(:start)
         else
-            @month = Time.now.in_time_zone
-            events = Event.where("start >= ? AND start <= ?", @month, Time.now.in_time_zone.end_of_month).order(:start)
+            @month = Time.now
+            events = Event.where("start >= ? AND start <= ?", @month.in_time_zone, Time.now.end_of_month.in_time_zone).order(:start)
         end
         
         @dates = []
