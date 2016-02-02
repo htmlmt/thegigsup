@@ -98,6 +98,7 @@
                                 <% twitter.sub!(/http\:\/\/www./, '')  if twitter.include? "http://www." %>
                                 <% twitter.sub!(/www./, '')            if twitter.include? "www." %>
                                 <p>@<%= twitter.downcase %></p>
+                                
                             </div>
                         </div>
                     </a>
