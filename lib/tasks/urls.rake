@@ -12,11 +12,12 @@ namespace :bands do
         division = total / 20
         remainder = total % 20
         
-        iterator = 1
+        iterator = 0
+        
         division.times do |n|
             20.times do |i|
-                if bands_with_events[i].songkick_id != nil
-                    urlsCall = "http://developer.echonest.com/api/v4/artist/urls?api_key=" + ENV["ECHO_API_KEY"] + '&id=songkick:artist:' + bands_with_events[i].songkick_id.to_s + '&format=json'
+                if bands_with_events[iterator].songkick_id != nil
+                    urlsCall = "http://developer.echonest.com/api/v4/artist/urls?api_key=" + ENV["ECHO_API_KEY"] + '&id=songkick:artist:' + bands_with_events[iterator].songkick_id.to_s + '&format=json'
 
                     echo_urls = Curl::Easy.new(urlsCall) do |curl| end
 
@@ -27,21 +28,22 @@ namespace :bands do
                     if echo_urls_info["response"]["status"]["code"] == 0
                         if echo_urls_info["response"]["urls"] != nil
                             if echo_urls_info["response"]["urls"]["twitter_url"]
-                                bands_with_events[i].update(twitter: echo_urls_info["response"]["urls"]["twitter_url"])
+                                bands_with_events[iterator].update(twitter: echo_urls_info["response"]["urls"]["twitter_url"])
                             end
                             if echo_urls_info["response"]["urls"]["official_url"]
-                                bands_with_events[i].update(website: echo_urls_info["response"]["urls"]["official_url"])
+                                bands_with_events[iterator].update(website: echo_urls_info["response"]["urls"]["official_url"])
                             end
                         end
                     end
                 end
+                iterator = iterator + 1
             end
-            iterator = iterator + 20
             sleep(60)
         end
-        remainder.times do |i|
-            if bands_with_events[i].songkick_id != nil
-                urlsCall = "http://developer.echonest.com/api/v4/artist/urls?api_key=" + ENV["ECHO_API_KEY"] + '&id=songkick:artist:' + bands_with_events[i].songkick_id.to_s + '&format=json'
+        
+        remainder.times do |n|
+            if bands_with_events[iterator].songkick_id != nil
+                urlsCall = "http://developer.echonest.com/api/v4/artist/urls?api_key=" + ENV["ECHO_API_KEY"] + '&id=songkick:artist:' + bands_with_events[iterator].songkick_id.to_s + '&format=json'
 
                 echo_urls = Curl::Easy.new(urlsCall) do |curl| end
 
@@ -53,14 +55,15 @@ namespace :bands do
                     puts echo_urls_info["response"]["urls"][0]
                     if echo_urls_info["response"]["urls"] != nil
                         if echo_urls_info["response"]["urls"]["twitter_url"]
-                            bands_with_events[i].update(twitter: echo_urls_info["response"]["urls"]["twitter_url"])
+                            bands_with_events[iterator].update(twitter: echo_urls_info["response"]["urls"]["twitter_url"])
                         end
                         if echo_urls_info["response"]["urls"]["official_url"]
-                            bands_with_events[i].update(website: echo_urls_info["response"]["urls"]["official_url"])
+                            bands_with_events[iterator].update(website: echo_urls_info["response"]["urls"]["official_url"])
                         end
                     end
                 end
             end
+            iterator = iterator + 1
         end
         
     end

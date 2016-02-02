@@ -27,7 +27,7 @@
     }
     .band--links {
         background-color: $siteCalendarGrey;
-        margin-top: 1rem;
+        margin: 1rem 0;
     }
     .links--website {
         @include flexbox();
@@ -51,6 +51,7 @@
 @media only screen and (min-width: $smallTabletBreakpoint) {
     .events--band-container {
         @include flexbox();
+        padding: 0 1rem;
         .events--band {
             width: 50%;
             margin: 3.5rem auto;
