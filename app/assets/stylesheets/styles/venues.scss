@@ -39,6 +39,9 @@
             color: $siteBlack;
         }
     }
+    .venue--description {
+        margin-bottom: 1rem;
+    }
 }
 
 @media only screen and (min-width: $smallTabletBreakpoint) {
