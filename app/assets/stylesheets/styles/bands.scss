@@ -22,8 +22,12 @@
             border-right: .2rem solid #cccccc;
         }
     }
+    .band--video {
+        margin-top: 1rem;
+    }
     .band--links {
         background-color: $siteCalendarGrey;
+        margin-top: 1rem;
     }
     .links--website {
         @include flexbox();
