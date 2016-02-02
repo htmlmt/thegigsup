@@ -77,7 +77,7 @@
                             
                             </div>
                             <div class="website--text">
-                                <% website = @venue.website %>
+                                <% website = @band.website %>
                                 <% website.sub!(/https\:\/\/www./, '') if website.include? "https://www." %>
                                 <% website.sub!(/http\:\/\/www./, '')  if website.include? "http://www." %>
                                 <% website.sub!(/www./, '')            if website.include? "www." %>
@@ -87,7 +87,7 @@
                     </a>
                 <% end %>
                 <% if @band.twitter %>
-                    <a href="https://twitter.com/<%= @band.twitter.downcase %>">
+                    <a href="<%= @band.twitter.downcase %>">
                         <div class="links--website">
                             <div class="website--icon">
                                 <%= image_tag('twitter.png') %>
