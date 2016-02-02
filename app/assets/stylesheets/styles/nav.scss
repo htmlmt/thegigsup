@@ -43,8 +43,10 @@
     @include flexbox-justify-content(space-between);
     background-color: $siteGrey;
     border-bottom: 5px solid $siteLightestGrey;
-    position: relative;
+    position: fixed;
     z-index: 300;
+    top: 71px;
+    width: 100%;
     .navigation--back-space {
         width: 0;
     }
