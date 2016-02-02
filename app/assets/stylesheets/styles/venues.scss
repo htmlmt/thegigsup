@@ -1,12 +1,12 @@
 .events--venue-container {
-    @include flexbox();
     .events--venue {
-        margin: 3.5rem auto;
-        width: 50%;
+        margin: 3.5rem auto 0 auto;
+        width: 90%;
         max-width: 600px;
     }
     .events--list {
-        width: 50%;
+        margin: 3.5rem auto;
+        width: 90%;
     }
     .links--address {
         @include flexbox();
@@ -37,6 +37,20 @@
         margin-bottom: 1rem;
         h2 {
             color: $siteBlack;
+        }
+    }
+}
+
+@media only screen and (min-width: $smallTabletBreakpoint) {
+    .events--venue-container {
+        @include flexbox();
+        .events--venue {
+            width: 50%;
+            margin: 3.5rem auto;
+        }
+        .events--list {
+            width: 50%;
+            margin: 3.5rem auto;
         }
     }
 }

@@ -23,3 +23,21 @@ a:visited,
 a:hover {
     color: $siteBlack;
 }
+
+.body--events h2 {
+    font-size: (24rem/16);
+}
+
+.body--events h3 {
+    font-size: (24rem/16);
+}
+
+.body--events h4 {
+    font-size: (20rem/16);
+}
+
+@media only screen and (min-width: $smallTabletBreakpoint) {
+    .body--events h2 {
+        font-size: (40rem/16);
+    }
+}

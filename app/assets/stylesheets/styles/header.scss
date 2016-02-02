@@ -18,11 +18,17 @@
 }
 
 .header--social {
-    @include flexbox();
-    @include flexbox-align-items(center);
-    @include flexbox-justify-content(space-between);
+    display: none;
     width: 5.5rem;
     a {
         width: 2.25rem;
+    }
+}
+
+@media only screen and (min-width: 380px) {
+    .header--social {
+        @include flexbox();
+        @include flexbox-align-items(center);
+        @include flexbox-justify-content(space-between);
     }
 }

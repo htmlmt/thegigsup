@@ -2,10 +2,8 @@ namespace :bands do
     task :similar => :environment do
         puts "Finding similar artists...\n"
         
-        n = Band.where(songkick_id: 1).id
-        
         20.times do |i|
-            looped_band = Band.find(i + 21)
+            looped_band = Band.find(i + 41)
             
             similarCall = "http://developer.echonest.com/api/v4/artist/similar?api_key=" + ENV["ECHO_API_KEY"] + '&id=songkick:artist:' + looped_band.songkick_id.to_s + '&bucket=id:songkick&format=json'
 

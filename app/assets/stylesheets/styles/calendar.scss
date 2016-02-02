@@ -47,7 +47,6 @@
         margin: 0;
     }
     h2 {
-        font-size: (46rem/16);
         font-weight: bold;
         color: $white;
     }
@@ -61,6 +60,7 @@
 
 .events--list {
     max-width: 600px;
+    width: 90%;
     margin: 3.5rem auto;
     .list--day {
         @include flexbox();
@@ -94,12 +94,14 @@
         .info--bands {
             background-color: $bandBackgroundGrey;
             .bands--arrow {
+                display: none;
                 width: 1.75rem;
             }
         }
         .info--venue {
             background-color: $siteCalendarGrey;
             .venue--arrow {
+                display: none;
                 width: 1.75rem;
             }
         }
@@ -114,7 +116,8 @@
             }
             .time--upload {
                 width: 25%;
-                cursor: pointer;
+                cursor: default;
+                opacity: 0;
             }
         }
         .info--container {
@@ -141,6 +144,23 @@
             color: $white;
             width: 10rem;
             margin: 0 auto;
+        }
+    }
+}
+
+@media only screen and (min-width: $smallTabletBreakpoint) {
+    .events--list {
+        .list--day {
+            .info--bands {
+                .bands--arrow {
+                    display: block;
+                }
+            }
+            .info--venue {
+                .venue--arrow {
+                    display: block;
+                }
+            }
         }
     }
 }
