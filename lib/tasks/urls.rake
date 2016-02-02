@@ -41,7 +41,7 @@ namespace :bands do
         end
         remainder.times do |i|
             if bands_with_events[i].songkick_id != nil
-                urlsCall = "http://developer.echonest.com/api/v4/artist/urls?api_key=" + ENV["ECHO_API_KEY"] + '&id=songkick:artist:' + bands_with_events[i]).songkick_id.to_s + '&format=json'
+                urlsCall = "http://developer.echonest.com/api/v4/artist/urls?api_key=" + ENV["ECHO_API_KEY"] + '&id=songkick:artist:' + bands_with_events[i].songkick_id.to_s + '&format=json'
 
                 echo_urls = Curl::Easy.new(urlsCall) do |curl| end
 
