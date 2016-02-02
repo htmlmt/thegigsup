@@ -93,7 +93,11 @@
                                 <%= image_tag('twitter.png') %>
                             </div>
                             <div class="website--text">
-                                <p>@<%= @band.twitter.downcase %></p>
+                                <% twitter = @band.twitter %>
+                                <% twitter.sub!(/https\:\/\/www./, '') if twitter.include? "https://www." %>
+                                <% twitter.sub!(/http\:\/\/www./, '')  if twitter.include? "http://www." %>
+                                <% twitter.sub!(/www./, '')            if twitter.include? "www." %>
+                                <p>@<%= twitter.downcase %></p>
                             </div>
                         </div>
                     </a>
