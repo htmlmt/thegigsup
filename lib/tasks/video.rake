@@ -18,11 +18,10 @@ namespace :bands do
                         if echo_video_info["response"]["video"][0] != nil
                             echo_video_info["response"]["video"].each do |video|
                                 if video["site"] = "youtube.com"
-                                    query_string = URI.parse(echo_video_info["response"]["video"][0]["url"]).query
-                                    parameters = Hash[URI.decode_www_form(query_string)]
-                                    youtube_id = parameters['v']
+                                    url = video["url"]
+                                    youtube_id = url[/(?<=[?&]v=)[^&$]+/].to_s
                                     
-                                    Band.find(i + iterator).update(video_link: echo_video_info["response"]["video"][0]["url"], video_kind: echo_video_info["response"]["video"][0]["site"], youtube_id: youtube_id)
+                                    Band.find(i + iterator).update(youtube_id: youtube_id)
                                     break
                                 end
                             end
