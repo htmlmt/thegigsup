@@ -47,6 +47,8 @@ gem 'jquery-ui-rails'
 
 gem 'rails4-autocomplete'
 
+gem 'rails_12factor'
+
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
