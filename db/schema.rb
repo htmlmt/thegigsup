@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160202104823) do
+ActiveRecord::Schema.define(version: 20160202110008) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -30,6 +30,7 @@ ActiveRecord::Schema.define(version: 20160202104823) do
     t.integer  "similars",    default: [],              array: true
     t.string   "video_link"
     t.string   "video_kind"
+    t.string   "youtube_id"
   end
 
   add_index "bands", ["slug"], name: "index_bands_on_slug", unique: true, using: :btree

@@ -1,5 +1,7 @@
 namespace :bands do
     task :video => :environment do
+        require 'uri'
+        
         iterator = 1
         34.times do |n|
             20.times do |i|
@@ -16,7 +18,11 @@ namespace :bands do
                         if echo_video_info["response"]["video"][0] != nil
                             echo_video_info["response"]["video"].each do |video|
                                 if video["site"] = "youtube.com"
-                                    Band.find(i + iterator).update(video_link: echo_video_info["response"]["video"][0]["url"], video_kind: echo_video_info["response"]["video"][0]["site"])
+                                    query_string = URI.parse(echo_video_info["response"]["video"][0]["url"]).query
+                                    parameters = Hash[URI.decode_www_form(query_string)]
+                                    youtube_id = parameters['v']
+                                    
+                                    Band.find(i + iterator).update(video_link: echo_video_info["response"]["video"][0]["url"], video_kind: echo_video_info["response"]["video"][0]["site"], youtube_id: youtube_id)
                                     break
                                 end
                             end
