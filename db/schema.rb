@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160202091202) do
+ActiveRecord::Schema.define(version: 20160202103225) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -28,6 +28,8 @@ ActiveRecord::Schema.define(version: 20160202091202) do
     t.string   "twitter"
     t.string   "tags",        default: [],              array: true
     t.integer  "similars",    default: [],              array: true
+    t.string   "video_link"
+    t.string   "video_kind"
   end
 
   add_index "bands", ["slug"], name: "index_bands_on_slug", unique: true, using: :btree
