@@ -41,6 +41,8 @@ gem 'paperclip'
 
 gem 'aws-sdk', '< 2.0'
 
+gem 'rake', '~> 10.5.0'
+
 gem 'jquery-ui-rails'
 
 gem 'rails4-autocomplete'
