@@ -40,15 +40,12 @@
 .events--navigation {
     @include flexbox();
     @include flexbox-align-items(center);
-    @include flexbox-justify-content(space-between);
+    @include flexbox-justify-content(center);
     background-color: $siteGrey;
     border-bottom: 5px solid $siteLightestGrey;
-    position: fixed;
-    z-index: 300;
-    top: 71px;
-    width: 100%;
     .navigation--back-space {
         width: 0;
+        display: none;
     }
     .navigation--back {
         display: none;
@@ -76,6 +73,10 @@
     }
 }
 
+.events--navigation > a {
+    display: none;
+}
+
 @media only screen and (min-width: 380px) {
     .events--navigation {
         .navigation--add {
@@ -85,8 +86,14 @@
 }
 
 @media only screen and (min-width: $smallTabletBreakpoint) {
+    .events--navigation > a {
+        display: block;
+    }
+    
     .events--navigation {
+        @include flexbox-justify-content(space-between);
         .navigation--back-space {
+            display: block;
             width: 190px;
         }
         .navigation--back {

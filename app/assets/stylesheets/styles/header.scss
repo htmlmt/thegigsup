@@ -1,8 +1,7 @@
 .body--header {
     padding: 1rem;
     background-color: $white;
-    position: fixed;
-    top: 0;
+    position: relative;
     width: 100%;
     z-index: 200;
 }
