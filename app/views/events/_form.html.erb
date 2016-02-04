@@ -10,11 +10,12 @@
             </ul>
         </div>
     <% end %>
-    
-    <div class="field">
-        <%= f.label :venue %><br>
-        <%= autocomplete_field_tag 'venue', '', autocomplete_venue_name_events_path, 'value' => @venue.name %>
-    </div>
+    <% if @venue %>
+        <div class="field">
+            <%= f.label :venue %><br>
+            <%= autocomplete_field_tag 'venue', '', autocomplete_venue_name_events_path, 'value' => @venue.name %>
+        </div>
+    <% end %>
     <div class="field">
         <%= f.label :bands %><br>
         <%= autocomplete_field_tag 'bands', '', autocomplete_band_name_events_path, 'data-delimiter' => ', ', :multiple => true %>
