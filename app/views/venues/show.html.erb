@@ -48,7 +48,7 @@
                         <div class="empty--message">
                             <h4><%= @venue.name %> has no events listed in <%= @month.strftime("%B") %>.</h4>
                         </div>
-                        <a href="/events/new">
+                        <a href="/events/new/venues/<%= @venue.slug %>">
                             <div class="empty--add">
                                 Add an event
                             </div>
