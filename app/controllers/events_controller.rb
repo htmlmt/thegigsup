@@ -84,6 +84,12 @@ class EventsController < ApplicationController
     def new
         @event = Event.new
     end
+    
+    # GET /events/new
+    def venew
+        @event = Event.new
+        @venue = Venue.friendly.find(params[:id])
+    end
 
     # GET /events/1/edit
     def edit

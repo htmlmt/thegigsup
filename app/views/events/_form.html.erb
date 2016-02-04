@@ -13,7 +13,7 @@
     
     <div class="field">
         <%= f.label :venue %><br>
-        <%= autocomplete_field_tag 'venue', '', autocomplete_venue_name_events_path %>
+        <%= autocomplete_field_tag 'venue', '', autocomplete_venue_name_events_path, 'value' => @venue.name %>
     </div>
     <div class="field">
         <%= f.label :bands %><br>

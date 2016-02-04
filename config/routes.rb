@@ -14,4 +14,6 @@ Rails.application.routes.draw do
   root 'events#index'
   get 'tags/:tag' => 'events#tags'
   get 'tags/:tag/:month/:year' => 'events#tags'
+  get 'events/new/venues/:id' => 'events#venew'
+  get 'gigs' => 'events#gigs'
 end

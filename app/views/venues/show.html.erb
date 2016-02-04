@@ -16,7 +16,9 @@
                             <%= image_tag('place-icon.png') %>
                         </div>
                         <div class="address--text">
-                            <p><%= @venue.street %><br>
+                            <% if @venue.street %>
+                                <p><%= @venue.street %></p>
+                            <% end %>
                             <p><%= @venue.city %></p>
                         </div>
                     </div>
@@ -25,7 +27,7 @@
                     <a href="<%= @venue.website %>">
                         <div class="links--website">
                             <div class="website--icon">
-                            
+                                
                             </div>
                             <div class="website--text">
                                 <% website = @venue.website %>
