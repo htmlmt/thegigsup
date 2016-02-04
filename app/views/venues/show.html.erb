@@ -9,20 +9,22 @@
                 <p><%= @venue.description %></p>
             </div>
             <div class="venue--links">
-                <% map_link = "http://maps.google.com/?q=" + @venue.name + "+" + @venue.city %>
-                <a href="<%= map_link %>" target="_blank">
-                    <div class="links--address">
-                        <div class="address--icon">
-                            <%= image_tag('place-icon.png') %>
+                <% if @venue.city != nil %>
+                    <% map_link = "http://maps.google.com/?q=" + @venue.name + "+" + @venue.city %>
+                    <a href="<%= map_link %>" target="_blank">
+                        <div class="links--address">
+                            <div class="address--icon">
+                                <%= image_tag('place-icon.png') %>
+                            </div>
+                            <div class="address--text">
+                                <% if @venue.street %>
+                                    <p><%= @venue.street %></p>
+                                <% end %>
+                                <p><%= @venue.city %></p>
+                            </div>
                         </div>
-                        <div class="address--text">
-                            <% if @venue.street %>
-                                <p><%= @venue.street %></p>
-                            <% end %>
-                            <p><%= @venue.city %></p>
-                        </div>
-                    </div>
-                </a>
+                    </a>
+                <% end %>
                 <% if @venue.website %>
                     <a href="<%= @venue.website %>">
                         <div class="links--website">
