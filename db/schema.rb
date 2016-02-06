@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160202110008) do
+ActiveRecord::Schema.define(version: 20160206155256) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -31,6 +31,7 @@ ActiveRecord::Schema.define(version: 20160202110008) do
     t.string   "video_link"
     t.string   "video_kind"
     t.string   "youtube_id"
+    t.boolean  "headliner"
   end
 
   add_index "bands", ["slug"], name: "index_bands_on_slug", unique: true, using: :btree
@@ -56,6 +57,7 @@ ActiveRecord::Schema.define(version: 20160202110008) do
     t.datetime "poster_updated_at"
     t.string   "ticket_link"
     t.string   "songkick_link"
+    t.integer  "headliner"
   end
 
   create_table "friendly_id_slugs", force: :cascade do |t|

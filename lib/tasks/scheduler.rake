@@ -12,8 +12,6 @@ namespace :events do
         
         eventNumber = JSON.parse(events.body_str)["resultsPage"]["totalEntries"].to_i
         
-        puts eventNumber
-        
         if eventNumber > 50
             pages = eventNumber / 50.0
             if pages % 1 != 0
@@ -24,8 +22,6 @@ namespace :events do
         else
             pages = 1
         end
-        
-        puts pages
         
         eventsObjects = []
         
@@ -43,7 +39,6 @@ namespace :events do
             eventsObjects.each do |eventObject|
                 eventObject.each do |event|
                     if event["type"] == "Concert"
-                        puts eventObject
                         if (Event.find_by songkick_id: event["id"].to_i) == nil
                             if (Venue.find_by songkick_id: event["venue"]["id"].to_i) == nil
                                 venueCall = "http://api.songkick.com/api/3.0/venues/" + event["venue"]["id"].to_s + ".json?apikey=" + ENV["API_KEY"]
@@ -100,6 +95,10 @@ namespace :events do
                                 end
                     
                                 @event.bands << @band
+                                
+                                if band["billingIndex"] == 1
+                                    @event.update(headliner: @band.id)
+                                end
                             end
                         end
                     end
