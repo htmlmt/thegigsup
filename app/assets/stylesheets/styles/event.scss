@@ -1,0 +1,18 @@
+.events--event-container {
+    
+}
+
+@media only screen and (min-width: $smallTabletBreakpoint) {
+    .events--event-container {
+        @include flexbox();
+        padding: 0 1rem;
+        .events--info {
+            width: 50%;
+            margin: 3.5rem auto;
+        }
+        .events--list {
+            width: 50%;
+            margin: 3.5rem auto;
+        }
+    }
+}
