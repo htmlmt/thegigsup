@@ -49,6 +49,10 @@ gem 'rails4-autocomplete'
 
 gem 'rails_12factor'
 
+gem 'momentjs-rails', '>= 2.9.0'
+
+gem 'bootstrap3-datetimepicker-rails', '~> 4.17.37'
+
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 

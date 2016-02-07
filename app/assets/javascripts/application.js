@@ -15,4 +15,6 @@
 //= require jquery-ui/autocomplete
 //= require autocomplete-rails
 //= require turbolinks
+//= require moment
+//= require bootstrap-datetimepicker
 //= require_tree .

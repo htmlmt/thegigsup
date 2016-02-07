@@ -2,6 +2,63 @@
     
 }
 
+.bootstrap-datetimepicker-widget {
+    .row {
+        @include flexbox();
+        .datepicker {
+            width: 50%;
+        }
+        .timepicker {
+            width: 40%;
+        }
+    }
+}
+
+.field .bootstrap-datetimepicker-widget table td, 
+.field .bootstrap-datetimepicker-widget table th {
+    text-align: center;
+    border-radius: 0px;
+}
+
+.field td {
+    border: 0;
+}
+
+#datetimepicker12 {
+    display: none;
+}
+
+.field .bootstrap-datetimepicker-widget table td span {
+    width: 25%;
+}
+
+.glyphicon {
+    position: relative;
+    top: 1px;
+    display: inline-block;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 1;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.glyphicon-chevron-left:before {
+    content: "◀";
+}
+
+.glyphicon-chevron-right:before {
+    content: "▶";
+}
+
+.glyphicon-chevron-up:before {
+    content: "▲";
+}
+
+.glyphicon-chevron-down:before {
+    content: "▼";
+}
+
 @media only screen and (min-width: $smallTabletBreakpoint) {
     .events--event-container {
         @include flexbox();
