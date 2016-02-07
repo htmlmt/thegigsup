@@ -50,16 +50,17 @@
             <%= autocomplete_field_tag 'bands', '', autocomplete_band_name_events_path, 'data-delimiter' => ', ', :multiple => true %>
         </div>
     <% end %>
-    <% nine_tonight = DateTime.now %>
     <div class="field">
-        <%= f.label 'Event date and time' %><br>
-        <%= f.text_field :start, :value => nine_tonight, id: "datetimepicker12" %>
+        <%= f.label 'Event date and time', :class => 'event-date-label' %><br>
+        <%= f.text_field :start, id: "datetimepicker12" %>
     </div>
     <script type="text/javascript">
+        var nineTonight = new Date("<%= DateTime.now.beginning_of_day + 20.hours %>")
         $(function () {
             $('#datetimepicker12').datetimepicker({
                 inline: true,
-                sideBySide: true
+                sideBySide: true,
+                defaultDate: nineTonight
             });
         });
     </script>

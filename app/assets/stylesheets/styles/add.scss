@@ -3,21 +3,16 @@
     margin: 0 auto;
 }
 
-.add--container {
-    width: 95%;
-    margin: 0 auto;
-}
-
 form {
-    width: 87.5%;
-    margin: 1rem 0 1rem auto;
+    width: 50%;
+    margin: 1rem auto
 }
 
 .add--heading {
     @include flexbox();
     @include flexbox-align-items(center);
-    width: 87.5%;
-    margin: 1rem 0 1rem auto;
+    width: 50%;
+    margin: 1rem auto;
     h1 {
         font-size: 1.5rem;
         font-weight: 600;

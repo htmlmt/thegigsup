@@ -110,6 +110,8 @@ class EventsController < ApplicationController
         
         respond_to do |format|
             if @event.save
+                binding.pry
+                @event.update(start: DateTime.strptime(event_params[:start]))
                 @venue.events << @event
                 repost = Repost.create()
                 @event.reposts << repost
