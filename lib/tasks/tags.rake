@@ -43,7 +43,10 @@ namespace :bands do
                 end
                 iterator = iterator + 1
             end
-            sleep(60)
+            60.times do |second|
+                puts 60 - (second + 1) + ' seconds until next request'
+                sleep(1)
+            end
         end
         
         remainder.times do |i|

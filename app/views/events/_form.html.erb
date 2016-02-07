@@ -41,7 +41,7 @@
             <% band_names.push(band.name) %>
         <% end %>
         <div class="field">
-            <%= f.label :bands %><br>
+            <%= f.label 'Bands (separated by comma, and ordered by set time)' %><br>
             <%= autocomplete_field_tag 'bands', '', autocomplete_band_name_events_path, 'data-delimiter' => ', ', :multiple => true, 'value' => band_names.join(', ')%>
         </div>
     <% else %>

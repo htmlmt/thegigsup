@@ -29,8 +29,6 @@ namespace :bands do
 
                     echo_similar_info = JSON.parse(echo_similar.body_str)
             
-                    puts echo_similar_info["response"]
-            
                     if echo_similar_info["response"]["status"]["code"] == 0
                         artists = echo_similar_info["response"]["artists"]
                         songkick_ids = []
@@ -88,5 +86,6 @@ namespace :bands do
         end
         
         puts "Similar artists found.\n"
+        
     end
 end

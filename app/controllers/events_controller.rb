@@ -130,6 +130,12 @@ class EventsController < ApplicationController
                     end
                 end
                 
+                headliner = Band.find_by(name: bands[bands.length - 1])
+                
+                @event.update(headliner: headliner.id)
+                
+                binding.pry
+                
                 format.html { redirect_to events_url, notice: 'Event was successfully created.' }
                 format.json { render :show, status: :created, location: @event }
             else
