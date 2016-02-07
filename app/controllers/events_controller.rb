@@ -129,6 +129,7 @@ class EventsController < ApplicationController
                         @event.bands << Band.find_by(name: band)
                     end
                 end
+                
                 format.html { redirect_to events_url, notice: 'Event was successfully created.' }
                 format.json { render :show, status: :created, location: @event }
             else
@@ -143,6 +144,9 @@ class EventsController < ApplicationController
     def update
         respond_to do |format|
             if @event.update(event_params)
+                event_date_time = event_params[:start] + ' CST'
+                @event.update(start: DateTime.strptime(event_date_time, '%m/%d/%Y %l:%M %p %Z'))
+                
                 format.html { redirect_to events_url, notice: 'Event was successfully updated.' }
                 format.json { render :show, status: :ok, location: @event }
             else
