@@ -65,22 +65,39 @@
                         <h4><%= date.strftime("%a") %></h4>
                     </div>
                     <div class="day--info">
-                        <% events = Event.where(venue_id: @venue.id).where('start BETWEEN ? AND ?', date, date.end_of_day).order(:start) %>
+                        <% events = @venue.events.where('start BETWEEN ? AND ?', date.beginning_of_day, date.end_of_day).order(:start) %>
                         <% events.each do |event| %>
                             <div class="info--container">
-                                <div class="info--bands">
-                                    <% event.bands.each do |band| %>
-                                        <% bands_link = '/bands/' + band.slug + '/' + @month.strftime("%B/%Y").downcase %>
-                                        <%= link_to bands_link do %>
-                                            <div class="bands--name">
-                                                <h2><%= band.name %></h2>
+                                <a href="/events/<%= event.id %>">
+                                    <% if event.poster.url != "/posters/original/missing.png" %>
+                                        <div class="info--bands" style="background-image: url(<%= image_url event.poster.url(:retina) %>">
+                                            <div class="bands--overlay">
                                             </div>
-                                            <div class="bands--arrow">
-                                                <%= image_tag('arrow-white.png') %>
+                                    <% else %>
+                                        <div class="info--bands">
+                                    <% end %>
+                                    <% headliner = false %>
+                                    <% event.bands.each do |band| %>
+                                        <% if event.headliner == band.id %>
+                                            <% headliner = band %>
+                                        <% else %>
+                                            <div class="bands--name">
+                                                <h3><%= band.name %></h3>
                                             </div>
                                         <% end %>
                                     <% end %>
-                                </div>
+                                    <% if headliner != false %>
+                                        <div class="bands--headliner">
+                                            <div class="headliner--name">
+                                                <h2><%= headliner.name %></h2>
+                                            </div>
+                                            <div class="headliner--arrow">
+                                                <%= image_tag('arrow-white.png') %>
+                                            </div>
+                                        </div>
+                                    <% end %>
+                                    </div>
+                                </a>
                                 <div class="info--venue">
                                     <% venue_link = '/venues/' + event.venue.slug + '/' + @month.strftime("%B/%Y").downcase %>
                                     <%= link_to venue_link do %>
@@ -96,9 +113,15 @@
                                     <p class="time--time">
                                         <%= event.start.in_time_zone.strftime("%l:%M %P") %>
                                     </p>
-                                    <div class="time--upload">
-                                        <%= image_tag('upload-poster.png') %>
-                                    </div>
+                                    <% if event.poster.url == "/posters/original/missing.png" %>
+                                        <div class="time--upload">
+                                            <%= image_tag('upload-poster.png') %>
+                                        </div>
+                                    <% else %>
+                                        <div class="time--upload" style="opacity: 0; cursor: default;">
+                                            <%= image_tag('upload-poster.png') %>
+                                        </div>
+                                    <% end %>
                                 </div>
                             </div>
                         <% end %>
