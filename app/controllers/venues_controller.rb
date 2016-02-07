@@ -89,6 +89,6 @@ class VenuesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def venue_params
-      params.require(:venue).permit(:name, :city, :street, :zip, :website, :longitude, :latitude)
+      params.require(:venue).permit(:name, :city, :street, :zip, :website, :longitude, :latitude, :description, :links)
     end
 end
