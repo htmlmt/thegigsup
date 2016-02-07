@@ -55,7 +55,7 @@
         <%= f.text_field :start, id: "datetimepicker12" %>
     </div>
     <script type="text/javascript">
-        var nineTonight = new Date("<%= DateTime.now.beginning_of_day + 20.hours %>")
+        var nineTonight = new Date("<%= DateTime.now.in_time_zone.beginning_of_day + 20.hours %>")
         $(function () {
             $('#datetimepicker12').datetimepicker({
                 inline: true,
