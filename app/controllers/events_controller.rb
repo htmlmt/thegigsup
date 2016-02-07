@@ -134,8 +134,6 @@ class EventsController < ApplicationController
                 
                 @event.update(headliner: headliner.id)
                 
-                binding.pry
-                
                 format.html { redirect_to events_url, notice: 'Event was successfully created.' }
                 format.json { render :show, status: :created, location: @event }
             else
@@ -148,10 +146,41 @@ class EventsController < ApplicationController
     # PATCH/PUT /events/1
     # PATCH/PUT /events/1.json
     def update
+        if Venue.find_by(name: params[:venue]) == nil
+            @venue = Venue.create(name: params[:venue])
+        else
+            @venue = Venue.find_by(name: params[:venue])
+        end
+        
+        @bands = []
+        
         respond_to do |format|
             if @event.update(event_params)
                 event_date_time = event_params[:start] + ' CST'
                 @event.update(start: DateTime.strptime(event_date_time, '%m/%d/%Y %l:%M %p %Z'))
+                unless @venue.events.exists(@event.id)
+                    @venue.events << @event
+                end
+                
+                bands = params[:bands].split(",")
+                
+                bands.each do |band|
+                    band = band.strip
+                end
+                
+                bands.each do |band|
+                    if Band.find_by(name: band) == nil
+                        @event.bands << Band.create(name: band)
+                    else
+                        unless @event.bands.exists(Band.find_by(name: band).id)
+                            @event.bands << Band.find_by(name: band)
+                        end
+                    end
+                end
+                
+                headliner = Band.find_by(name: bands[bands.length - 1])
+                
+                @event.update(headliner: headliner.id)
                 
                 format.html { redirect_to events_url, notice: 'Event was successfully updated.' }
                 format.json { render :show, status: :ok, location: @event }
