@@ -110,8 +110,8 @@ class EventsController < ApplicationController
         
         respond_to do |format|
             if @event.save
-                binding.pry
-                @event.update(start: DateTime.strptime(event_params[:start]))
+                event_date_time = event_params[:start] + ' CST'
+                @event.update(start: DateTime.strptime(event_date_time, '%m/%d/%Y %l:%M %p %Z'))
                 @venue.events << @event
                 repost = Repost.create()
                 @event.reposts << repost
