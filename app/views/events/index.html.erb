@@ -33,20 +33,15 @@
                                 <% else %>
                                     <div class="info--bands">
                                 <% end %>
-                                <% headliner = false %>
-                                <% event.bands.each do |band| %>
-                                    <% if event.headliner == band.id %>
-                                        <% headliner = band %>
-                                    <% else %>
-                                        <div class="bands--name">
-                                            <h3><%= band.name %></h3>
-                                        </div>
-                                    <% end %>
+                                <% event.supporting_acts.each do |id| %>
+                                    <div class="bands--name">
+                                        <h3><%= Band.find(id).name %></h3>
+                                    </div>
                                 <% end %>
-                                <% if headliner != false %>
+                                <% event.headliners.each do |id| %>
                                     <div class="bands--headliner">
                                         <div class="headliner--name">
-                                            <h2><%= headliner.name %></h2>
+                                            <h2><%= Band.find(id).name %></h2>
                                         </div>
                                         <div class="headliner--arrow">
                                             <%= image_tag('arrow-white.png') %>

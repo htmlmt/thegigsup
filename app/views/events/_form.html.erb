@@ -10,39 +10,61 @@
             </ul>
         </div>
     <% end %>
-    <% if @venue %>
-        <div class="field">
-            <%= f.label :venue %><br>
-            <%= autocomplete_field_tag 'venue', '', autocomplete_venue_name_events_path, 'value' => @venue.name %>
-        </div>
-    <% elsif @event.venue != nil %>
-        <div class="field">
-            <%= f.label :venue %><br>
-            <%= autocomplete_field_tag 'venue', '', autocomplete_venue_name_events_path, 'value' => @event.venue.name %>
-        </div>
-    <% else %>
-        <div class="field">
-            <%= f.label :venue %><br>
-            <%= autocomplete_field_tag 'venue', '', autocomplete_venue_name_events_path %>
-        </div>
-    <% end %>
-    <% if @bands %>
-        <% band_names = [] %>
-        <% @event.bands.each do |band| %>
-            <% band_names.push(band.name) %>
+    <div class="form--venue">
+        <% if @venue %>
+            <div class="field">
+                <%= f.label :venue %>
+                <%= autocomplete_field_tag 'venue', '', autocomplete_venue_name_events_path, 'value' => @venue.name %>
+            </div>
+        <% elsif @event.venue != nil %>
+            <div class="field">
+                <%= f.label :venue %>
+                <%= autocomplete_field_tag 'venue', '', autocomplete_venue_name_events_path, 'value' => @event.venue.name %>
+            </div>
+        <% else %>
+            <div class="field">
+                <%= f.label :venue %>
+                <%= autocomplete_field_tag 'venue', '', autocomplete_venue_name_events_path %>
+            </div>
         <% end %>
-        <div class="field">
-            <%= f.label :bands %><br>
-            <%= autocomplete_field_tag 'bands', '', autocomplete_band_name_events_path, 'data-delimiter' => ', ', :multiple => true, 'value' => band_names.join(', ')%>
-        </div>
-    <% elsif @event.bands != nil %>
-        <% band_names = [] %>
-        <% @event.bands.each do |band| %>
-            <% band_names.push(band.name) %>
-        <% end %>
-        <div class="field">
-            <%= f.label 'Bands (separated by comma, and ordered by set time)' %><br>
-            <%= autocomplete_field_tag 'bands', '', autocomplete_band_name_events_path, 'data-delimiter' => ', ', :multiple => true, 'value' => band_names.join(', ')%>
+    </div>
+    <% if @event.bands != nil %>
+        <div class="form--bands">
+            <div class="bands--supporting-acts">
+                <%= f.label 'Supporting acts (ordered by set time)' %>
+                <div class="supporting-acts--container">
+                    <% @event.supporting_acts.each_with_index do |id, index| %>
+                        <div class="field">
+                            <%= autocomplete_field_tag 'supporting_acts[' + index.to_s + ']', '', autocomplete_band_name_events_path, 'value' => Band.find(id).name %>
+                            <div class="field--remove field--remove-supporting-act">
+                                <%= image_tag('remove.png') %>
+                            </div>
+                        </div>
+                    <% end %>
+                </div>
+                
+                <div id="add-supporting-act">
+                    ADD SUPPORTING ACT
+                </div>
+            </div>
+        
+            <div class="bands--headliners">
+                <%= f.label 'Headliner(s) (ordered by set time)' %>
+                <div class="headliners--container">
+                    <% @event.headliners.each_with_index do |id, index| %>
+                        <div class="field">
+                            <%= autocomplete_field_tag 'headliners[' + index.to_s + ']', '', autocomplete_band_name_events_path, 'value' => Band.find(id).name %>
+                            <div class="field--remove field--remove-headliner">
+                                <%= image_tag('remove.png') %>
+                            </div>
+                        </div>
+                    <% end %>
+                </div>
+                
+                <div id="add-headliner">
+                    ADD HEADLINER
+                </div>
+            </div>
         </div>
     <% else %>
         <div class="field">
@@ -51,11 +73,16 @@
         </div>
     <% end %>
     <div class="field">
-        <%= f.label 'Event date and time', :class => 'event-date-label' %><br>
+        <%= f.label 'Event date and time', :class => 'event-date-label' %>
         <%= f.text_field :start, id: "datetimepicker12" %>
     </div>
+    <% if @event.start != nil %>
+        <% date_default = @event.start %>
+    <% else %>
+        <% date_default = DateTime.now.in_time_zone.beginning_of_day + 20.hours %>
+    <% end %>
     <script type="text/javascript">
-        var nineTonight = new Date("<%= DateTime.now.in_time_zone.beginning_of_day + 20.hours %>")
+        var nineTonight = new Date("<%= date_default %>")
         $(function () {
             $('#datetimepicker12').datetimepicker({
                 inline: true,
@@ -72,3 +99,59 @@
         <%= f.submit %>
     </div>
 <% end %>
+<script type="text/javascript">
+    var removedSupportingActs = 0;
+    var removedHeadliners = 0;
+    
+    $('#add-supporting-act').click(function(){
+        supportingActNumber = $('.supporting-acts--container').children().size();
+        
+        supportingActHtml = '<div class="field"><%= autocomplete_field_tag "supporting-acts", "", autocomplete_band_name_events_path %><div class="field--remove field--remove-supporting-act"><%= image_tag('remove.png') %></div></div>'
+        
+        $('.supporting-acts--container').append(supportingActHtml);
+        
+        $('.supporting-acts--container').children().last().children().first().attr('name', 'supporting-acts[' + supportingActNumber + ']');
+        
+        $('.supporting-acts--container').children().last().children().first().attr('id', 'supporting-acts[' + supportingActNumber + ']');
+        
+        $('.field--remove-supporting-act').click(function(){
+            $(this).prev().attr('name', 'removed_supporting_acts[' + removedSupportingActs + ']');
+            $(this).hide();
+            $(this).prev().hide();
+            removedSupportingActs++;
+        });
+    });
+    
+    $('#add-headliner').click(function(){
+        headlinerNumber = $('.headliners--container').children().size()
+        
+        headlinerHtml = '<div class="field"><%= autocomplete_field_tag "headliners", "", autocomplete_band_name_events_path %><div class="field--remove field--remove-headliner"><%= image_tag('remove.png') %></div></div>'
+        
+        $('.headliners--container').append(headlinerHtml);
+        
+        $('.headliners--container').children().last().children().first().attr('name', 'headliners[' + headlinerNumber + ']');
+        
+        $('.headliners--container').children().last().children().first().attr('id', 'headliners[' + headlinerNumber + ']');
+        
+        $('.field--remove-headliner').click(function(){
+            $(this).prev().attr('name', 'removed_headliners[' + removedHeadliners + ']');
+            $(this).hide();
+            $(this).prev().hide();
+            removedHeadliners++;
+        });
+    });
+    
+    $('.field--remove-supporting-act').click(function(){
+        $(this).prev().attr('name', 'removed_supporting_acts[' + removedSupportingActs + ']');
+        $(this).hide();
+        $(this).prev().hide();
+        removedSupportingActs++;
+    });
+    
+    $('.field--remove-headliner').click(function(){
+        $(this).prev().attr('name', 'removed_headliners[' + removedHeadliners + ']');
+        $(this).hide();
+        $(this).prev().hide();
+        removedHeadliners++;
+    });
+</script>

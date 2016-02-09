@@ -1,0 +1,128 @@
+label {
+    margin-bottom: 1rem;
+    display: block;
+}
+
+.form--venue {
+    margin-bottom: 2rem;
+}
+
+.form--bands {
+    @include flexbox();
+    @include flexbox-justify-content(space-between);
+}
+
+.bands--supporting-acts,
+.bands--headliners {
+    margin-bottom: 1rem;
+    width: 47.5%;
+    input {
+        width: 100%;
+    }
+}
+
+#add-supporting-act,
+#add-headliner {
+    margin-bottom: 2rem;
+    text-align: center;
+    background-color: $siteGrey;
+    color: $white;
+    cursor: pointer;
+    padding: .5rem;
+}
+
+.bootstrap-datetimepicker-widget {
+    .row {
+        .timepicker {
+            border-top: 1px solid black;
+            border-bottom: 1px solid black;
+            padding: 15px;
+            margin: 20px 0;
+        }
+    }
+}
+
+.field .bootstrap-datetimepicker-widget table td, 
+.field .bootstrap-datetimepicker-widget table th {
+    text-align: center;
+    border-radius: 0px;
+}
+
+.field .bootstrap-datetimepicker-widget table td span.active {
+    background-color: $siteRed;
+    color: #ffffff;
+    text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
+}
+
+.field td {
+    border: 0;
+}
+
+#datetimepicker12 {
+    display: none;
+}
+
+.field .bootstrap-datetimepicker-widget table td span {
+    width: 25%;
+}
+
+.glyphicon {
+    position: relative;
+    top: 1px;
+    display: inline-block;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 1;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.field .bootstrap-datetimepicker-widget table td {
+    height: 54px;
+    line-height: 54px;
+    width: 30px;
+}
+
+.event-date-label {
+    border-bottom: 1px solid #1e2626;
+    padding-bottom: .25rem;
+}
+
+.field .bootstrap-datetimepicker-widget table td.separator {
+    width: 10px;
+}
+
+.field .bootstrap-datetimepicker-widget table td.active, 
+.field .bootstrap-datetimepicker-widget table td.active:hover {
+    background-color: $siteRed;
+    color: #ffffff;
+    text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
+}
+
+.field {
+    position: relative;
+}
+
+.field--remove {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 25px;
+    cursor: pointer;
+}
+
+.glyphicon-chevron-left:before {
+    content: "◀";
+}
+
+.glyphicon-chevron-right:before {
+    content: "▶";
+}
+
+.glyphicon-chevron-up:before {
+    content: "▲";
+}
+
+.glyphicon-chevron-down:before {
+    content: "▼";
+}

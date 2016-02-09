@@ -116,25 +116,67 @@ class EventsController < ApplicationController
                 repost = Repost.create()
                 @event.reposts << repost
                 
-                bands = params[:bands].split(",")
+                supporting_acts = params["supporting-acts"]
                 
-                bands.each do |band|
-                    band = band.strip
-                end
-                
-                bands.each do |band|
-                    if Band.find_by(name: band) == nil
-                        @event.bands << Band.create(name: band)
-                    else
-                        @event.bands << Band.find_by(name: band)
+                supporting_acts.each do |index, name|
+                    name = name.strip
+                    unless name == ""
+                        if Band.find_by(name: name) == nil
+                            @event.bands << Band.create(name: name)
+                            supporting_acts = @event.supporting_acts.push(Band.find_by(name: name).id)
+                            @event.update(supporting_acts: supporting_acts)
+                        else
+                            @band = Band.find_by(name: name)
+                            band_in_lineup = false
+                            @event.bands.each do |band|
+                                if band.id == @band.id
+                                    band_in_lineup = true
+                                    break
+                                end
+                            end
+                            if band_in_lineup = false
+                                @event.bands << Band.find_by(name: name)
+                                supporting_acts = @event.supporting_acts.push(Band.find_by(name: name).id)
+                                @event.update(supporting_acts: supporting_acts)
+                            else
+                                supporting_acts = @event.supporting_acts.push(Band.find_by(name: name).id)
+                                @event.update(supporting_acts: supporting_acts)
+                            end
+                        end
                     end
                 end
                 
-                headliner = Band.find_by(name: bands[bands.length - 1])
+                headliners = params["headliners"]
                 
-                @event.update(headliner: headliner.id)
+                headliners.each do |index, name|
+                    name = name.strip
+                    unless name == ""
+                        if Band.find_by(name: name) == nil
+                            @event.bands << Band.create(name: name)
+                            headliners = @event.headliners.push(Band.find_by(name: name).id)
+                            @event.update(headliners: headliners)
+                        else
+                            @band = Band.find_by(name: name)
+                            band_in_lineup = false
+                            @event.bands.each do |band|
+                                if band.id == @band.id
+                                    band_in_lineup = true
+                                    break
+                                end
+                            end
+                            if band_in_lineup == false
+                                @event.bands << Band.find_by(name: name)
+                                headliners = @event.headliners.push(Band.find_by(name: name).id)
+                                @event.update(headliners: headliners)
+                            else
+                                headliners = @event.headliners.push(Band.find_by(name: name).id)
+                                @event.update(headliners: headliners)
+                            end
+                        end
+                    end
+                end
                 
-                format.html { redirect_to events_url, notice: 'Event was successfully created.' }
+                format.html { redirect_to @event, notice: 'Event was successfully created.' }
                 format.json { render :show, status: :created, location: @event }
             else
                 format.html { render :new }
@@ -158,31 +200,106 @@ class EventsController < ApplicationController
             if @event.update(event_params)
                 event_date_time = event_params[:start] + ' CST'
                 @event.update(start: DateTime.strptime(event_date_time, '%m/%d/%Y %l:%M %p %Z'))
-                unless @venue.events.exists(@event.id)
-                    @venue.events << @event
+                
+                if @venue.id != @event.venue.id
+                    @event.update(venue_id: @venue.id)
                 end
                 
-                bands = params[:bands].split(",")
-                
-                bands.each do |band|
-                    band = band.strip
-                end
-                
-                bands.each do |band|
-                    if Band.find_by(name: band) == nil
-                        @event.bands << Band.create(name: band)
-                    else
-                        unless @event.bands.exists(Band.find_by(name: band).id)
-                            @event.bands << Band.find_by(name: band)
+                if params["removed_supporting-acts"] != nil
+                    removed_supporting_acts = params["removed_supporting-acts"]
+                    
+                    removed_supporting_acts.each do |index, name|
+                        name = name.strip
+                        unless name == ""
+                            if Band.find_by(name: name) != nil
+                                @band = Band.find_by(name: name)
+                                @event.bands.delete(@band)
+                                @event.supporting_acts.delete(@band.id)
+                            end
                         end
                     end
                 end
                 
-                headliner = Band.find_by(name: bands[bands.length - 1])
+                if params["removed_headliners"] != nil
+                    removed_headliners = params["removed_headliners"]
+                    
+                    removed_headliners.each do |index, name|
+                        name = name.strip
+                        unless name == ""
+                            if Band.find_by(name: name) != nil
+                                @band = Band.find_by(name: name)
+                                @event.bands.delete(@band)
+                                @event.headliners.delete(@band.id)
+                            end
+                        end
+                    end
+                end
                 
-                @event.update(headliner: headliner.id)
+                if params["supporting_acts"] != nil
+                    supporting_acts = params["supporting_acts"]
                 
-                format.html { redirect_to events_url, notice: 'Event was successfully updated.' }
+                    supporting_acts.each do |index, name|
+                        name = name.strip
+                        unless name == ""
+                            if Band.find_by(name: name) == nil
+                                @band = Band.create(name: name)
+                                @event.bands << @band
+                            else
+                                @band = Band.find_by(name: name)
+                                band_in_lineup = false
+                                @event.bands.each do |band|
+                                    if band.id == @band.id
+                                        band_in_lineup = true
+                                        break
+                                    end
+                                end
+                                if band_in_lineup == false
+                                    @event.bands << @band
+                                end
+                            end
+                        end
+                    end
+                    
+                    @event.update(supporting_acts: [])
+                    supporting_acts.each do |supporting_act|
+                        supporting_acts = @event.supporting_acts.push(Band.find_by(name: supporting_act).id)
+                        @event.update(supporting_acts: supporting_acts)
+                    end
+                end
+                
+                if params["headliners"] != nil
+                    headliners = params["headliners"]
+                
+                    headliners.each do |index, name|
+                        name = name.strip
+                        unless name == ""
+                            if Band.find_by(name: name) == nil
+                                @band = Band.create(name: name)
+                                @event.bands << @band
+                            else
+                                @band = Band.find_by(name: name)
+                                band_in_lineup = false
+                                @event.bands.each do |band|
+                                    if band.id == @band.id
+                                        band_in_lineup = true
+                                        break
+                                    end
+                                end
+                                if band_in_lineup == false
+                                    @event.bands << @band
+                                end
+                            end
+                        end
+                    end
+                    
+                    @event.update(headliners: [])
+                    headliners.each do |headliner|
+                        headliners = @event.headliners.push(Band.find_by(name: headliner).id)
+                        @event.update(headliners: headliners)
+                    end
+                end
+                
+                format.html { redirect_to @event, notice: 'Event was successfully updated.' }
                 format.json { render :show, status: :ok, location: @event }
             else
                 format.html { render :edit }
