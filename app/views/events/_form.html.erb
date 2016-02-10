@@ -106,13 +106,13 @@
     $('#add-supporting-act').click(function(){
         supportingActNumber = $('.supporting-acts--container').children().size();
         
-        supportingActHtml = '<div class="field"><%= autocomplete_field_tag "supporting-acts", "", autocomplete_band_name_events_path %><div class="field--remove field--remove-supporting-act"><%= image_tag('remove.png') %></div></div>'
+        supportingActHtml = '<div class="field"><%= autocomplete_field_tag "supporting_acts", "", autocomplete_band_name_events_path %><div class="field--remove field--remove-supporting-act"><%= image_tag('remove.png') %></div></div>'
         
         $('.supporting-acts--container').append(supportingActHtml);
         
-        $('.supporting-acts--container').children().last().children().first().attr('name', 'supporting-acts[' + supportingActNumber + ']');
+        $('.supporting-acts--container').children().last().children().first().attr('name', 'supporting_acts[' + supportingActNumber + ']');
         
-        $('.supporting-acts--container').children().last().children().first().attr('id', 'supporting-acts[' + supportingActNumber + ']');
+        $('.supporting-acts--container').children().last().children().first().attr('id', 'supporting_acts[' + supportingActNumber + ']');
         
         $('.field--remove-supporting-act').click(function(){
             $(this).prev().attr('name', 'removed_supporting_acts[' + removedSupportingActs + ']');
