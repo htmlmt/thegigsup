@@ -14,14 +14,14 @@
         <meta property="og:url" content="http://www.thegigsup.com/bands/<%= @band.slug %>"/>
         <meta property="og:image" content="<%= image_url('loading.png') %>"/>
         <meta name="twitter:title" content="The Gigs Up | <%= @band.name %>">
-        <meta property="og:image" content="<%= image_url('loading.png') %>"/>
+        <meta name="twitter:image" content="<%= image_url('loading.png') %>">
     <% elsif @venue != nil %>
         <title>The Gigs Up | <%= @venue.name %></title>
         <meta property="og:title" content="The Gigs Up | <%= @venue.name %>"/>
         <meta property="og:url" content="http://www.thegigsup.com/venues/<%= @venue.slug %>"/>
         <meta property="og:image" content="<%= image_url('loading.png') %>"/>
         <meta name="twitter:title" content="The Gigs Up | <%= @venue.name %>">
-        <meta property="og:image" content="<%= image_url('loading.png') %>"/>
+        <meta name="twitter:image" content="<%= image_url('loading.png') %>">
     <% else %>
         <% bands_string = "" %>
         <% @event.headliners.each_with_index do |band, index| %>
@@ -37,10 +37,16 @@
         <% end %>
         <title>The Gigs Up | <%= bands_string %> at <%= @event.venue.name %></title>
         <meta property="og:title" content="The Gigs Up | <%= bands_string %> at <%= @event.venue.name %>"/>
+        <meta property="og:description" content="Concert: <%= @event.start.strftime('%B %-d at%l:%M %P') %>"/>
         <meta property="og:url" content="http://www.thegigsup.com/events/<%= @event.id %>"/>
-        <meta property="og:image" content="<%= image_url('loading.png') %>"/>
+        <% if @event.poster.url != "/posters/original/missing.png" %>
+            <meta property="og:image" content="<%= image_url event.poster.url(:retina) %>"/>
+            <meta name="twitter:image" content="<%= image_url event.poster.url(:retina) %>">
+        <% else %>
+            <meta property="og:image" content="<%= image_url('loading.png') %>"/>
+            <meta name="twitter:image" content="<%= image_url('loading.png') %>">
+        <% end %>
         <meta name="twitter:title" content="The Gigs Up | <%= bands_string %> at <%= @event.venue.name %>">
-        <meta property="og:image" content="<%= image_url('loading.png') %>"/>
     <% end %>
     
     <meta charset="utf-8">
