@@ -1,0 +1,113 @@
+<% if individual == false %>
+    <% if index != 0 %>
+        <% if previous_date.strftime("%m") != date.strftime("%m") %>
+            </section>
+            <hr>
+            <section class="events--month">
+        <% end %>
+    <% end %>
+<% end %>
+<div class="month--day">
+    <div class="day--number">
+        <% if individual == false %>
+            <% date = date %>
+        <% else %>
+            <% date = @event.start %>
+        <% end %>
+        <h3><%= date.strftime("%e") %></h3>
+        <h4><%= date.strftime("%a") %></h4>
+    </div>
+    <div class="day--info">
+        <% if individual == false %>
+            <% events = event_scope.where('start BETWEEN ? AND ?', date.beginning_of_day, date.end_of_day).order(:start) %>
+        <% else %>
+            <% events = Event.where(id: @event.id) %>
+        <% end %>
+        
+        <% events.each do |event| %>
+            <div class="info--container">
+                <% if individual == false %>
+                <a href="/events/<%= event.id %>">
+                <% end %>
+                    <% if event.poster.url != "/posters/original/missing.png" %>
+                        <div class="info--bands" style="background-image: url(<%= image_url event.poster.url(:retina) %>">
+                            <div class="bands--overlay">
+                            </div>
+                    <% else %>
+                        <div class="info--bands">
+                    <% end %>
+                    <% if individual == true %>
+                        <% event.supporting_acts.each do |id| %>
+                            <a href="/bands/<%= Band.find(id).slug %>">
+                                <div class="bands--link">
+                                    <div class="link--name">
+                                        <h2><%= Band.find(id).name %></h2>
+                                    </div>
+                                    <div class="link--arrow">
+                                        <%= image_tag('arrow-white.png') %>
+                                    </div>
+                                </div>
+                            </a>
+                        <% end %>
+                        <% event.headliners.each do |id| %>
+                            <a href="/bands/<%= Band.find(id).slug %>">
+                                <div class="bands--link">
+                                    <div class="link--name">
+                                        <h2><%= Band.find(id).name %></h2>
+                                    </div>
+                                    <div class="link--arrow">
+                                        <%= image_tag('arrow-white.png') %>
+                                    </div>
+                                </div>
+                            </a>
+                        <% end %>
+                    <% else %>
+                        <% event.supporting_acts.each do |id| %>
+                            <div class="bands--name">
+                                <h3><%= Band.find(id).name %></h3>
+                            </div>
+                        <% end %>
+                        <% event.headliners.each do |id| %>
+                            <div class="bands--headliner">
+                                <div class="headliner--name">
+                                    <h2><%= Band.find(id).name %></h2>
+                                </div>
+                                <div class="headliner--arrow">
+                                    <%= image_tag('arrow-white.png') %>
+                                </div>
+                            </div>
+                        <% end %>
+                    <% end %>
+                    </div>
+                <% if individual == false %>
+                </a>
+                <% end %>
+                <div class="info--venue">
+                    <% venue_link = '/venues/' + event.venue.slug + '/' + @month.strftime("%B/%Y").downcase %>
+                    <%= link_to venue_link do %>
+                        <div class="venue--title">
+                            <p><%= event.venue.name %></p>
+                        </div>
+                        <div class="venue--arrow">
+                            <%= image_tag('arrow.png') %>
+                        </div>
+                    <% end %>
+                </div>
+                <div class="info--time">
+                    <p class="time--time">
+                        <%= event.start.in_time_zone.strftime("%l:%M %P") %>
+                    </p>
+                    <% if event.poster.url == "/posters/original/missing.png" %>
+                        <div class="time--upload">
+                            <%= image_tag('upload-poster.png') %>
+                        </div>
+                    <% else %>
+                        <div class="time--upload" style="opacity: 0; cursor: default;">
+                            <%= image_tag('upload-poster.png') %>
+                        </div>
+                    <% end %>
+                </div>
+            </div>
+        <% end %>
+    </div>
+</div>

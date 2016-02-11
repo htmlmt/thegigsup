@@ -56,19 +56,17 @@
     p {
         color: $siteBlack;
     }
+    hr {
+        height: 5px;
+        background-color: rgba(0,0,0,.2);
+    }
 }
 
-.events--list {
+.events--month {
     max-width: 600px;
     width: 90%;
     margin: 3.5rem auto;
-    .list--month {
-        h2 {
-            margin-bottom: 1rem;
-            color: $siteBlack;
-        }
-    }
-    .list--day {
+    .month--day {
         @include flexbox();
         @include flexbox-align-items(flex-start);
         margin: 0 auto 3rem auto;
@@ -87,12 +85,6 @@
         .info--empty,
         .info--bands,
         .info--venue {
-            a {
-                padding: 1rem;
-                @include flexbox();
-                @include flexbox-align-items(center);
-                @include flexbox-justify-content(space-between);
-            }
             .bands--headliner {
                 padding: .5rem 1rem;
                 @include flexbox();
@@ -105,6 +97,14 @@
                     color: $white;
                     font-weight: 400;
                 }
+            }
+        }
+        .info--venue {
+            a {
+                padding: 1rem;
+                @include flexbox();
+                @include flexbox-align-items(center);
+                @include flexbox-justify-content(space-between);
             }
         }
         .info--empty {
@@ -184,8 +184,8 @@
 }
 
 @media only screen and (min-width: $smallTabletBreakpoint) {
-    .events--list {
-        .list--day {
+    .events--month {
+        .month--day {
             .info--bands {
                 .headliner--arrow {
                     display: block;

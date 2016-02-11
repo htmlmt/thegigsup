@@ -1,42 +1,61 @@
 <nav class="events--navigation">
-    <div class="navigation--back-space">
+    <% if show_see_all_events == true %>
+        <a href="/events/<%= @month.strftime("%B/%Y").downcase %>">
+            <div class="navigation--back">
+                <div class="back--arrow">
+                    <%= image_tag('white-arrow.png') %>
+                </div>
+                <div class="back--text">
+                    See all events
+                </div>
+            </div>
+        </a>
+    <% else %>
+        <div class="navigation--back-space">
         
-    </div>
+        </div>
+    <% end %>
     <div class="navigation--months">
-        <% if @month.strftime("%B") == Date.today.strftime("%B") %>
-            <div class="months--month months--current">
-                <div class="current--text">
-                    <%= @month.strftime("%B") %> 
+        <% if show_months == true %>
+            <% if @month.strftime("%B") == Date.today.strftime("%B") %>
+                <div class="months--month months--current">
+                    <div class="current--text">
+                        <%= @month.strftime("%B") %> 
+                    </div>
                 </div>
-            </div>
-            <div class="months--month">
-                <%= link_to (@month + 1.month).strftime("%B"), '/events/' + (@month + 1.month).strftime("%B").downcase + '/' + (@month + 1.month).strftime("%Y") %>
-            </div>
-            <div class="months--month">
-                <%= link_to (@month + 2.months).strftime("%B"), '/events/' + (@month + 2.months).strftime("%B").downcase + '/' + (@month + 2.months).strftime("%Y") %>
-            </div>
-        <% else %>
-            <div class="months--month">
-                <%= link_to (@month - 1.month).strftime("%B"), '/events/' + (@month - 1.month).strftime("%B").downcase + '/' + (@month - 1.month).strftime("%Y") %>
-            </div>
-            <div class="months--month months--current">
-                <div class="current--text">
-                    <%= @month.strftime("%B") %> 
+                <div class="months--month">
+                    <%= link_to (@month + 1.month).strftime("%B"), link + (@month + 1.month).strftime("%B").downcase + '/' + (@month + 1.month).strftime("%Y") %>
                 </div>
-            </div>
-            <div class="months--month">
-                <%= link_to (@month + 1.month).strftime("%B"), '/events/' + (@month + 1.month).strftime("%B").downcase + '/' + (@month + 1.month).strftime("%Y") %>
-            </div>
+                <div class="months--month">
+                    <%= link_to (@month + 2.months).strftime("%B"), link + (@month + 2.months).strftime("%B").downcase + '/' + (@month + 2.months).strftime("%Y") %>
+                </div>
+            <% else %>
+                <div class="months--month">
+                    <%= link_to (@month - 1.month).strftime("%B"), link + (@month - 1.month).strftime("%B").downcase + '/' + (@month - 1.month).strftime("%Y") %>
+                </div>
+                <div class="months--month months--current">
+                    <div class="current--text">
+                        <%= @month.strftime("%B") %> 
+                    </div>
+                </div>
+                <div class="months--month">
+                    <%= link_to (@month + 1.month).strftime("%B"), link + (@month + 1.month).strftime("%B").downcase + '/' + (@month + 1.month).strftime("%Y") %>
+                </div>
+            <% end %>
         <% end %>
     </div>
     <div class="navigation--add">
-        <a href="/events/new">
-            <div class="add--text">
-                Add an event
-            </div>
-            <div class="add--plus">
-                <%= image_tag('white-plus.png') %>
-            </div>
-        </a>
+        <% if show_add_an_event == true %>
+            <a href="/events/new">
+                <div class="add--text">
+                    Add an event
+                </div>
+                <div class="add--plus">
+                    <%= image_tag('white-plus.png') %>
+                </div>
+            </a>
+        <% end %>
+    </div>
+    <div class="navigation--border">
     </div>
 </nav>

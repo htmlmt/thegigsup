@@ -1,3 +1,23 @@
+.events--event-container {
+    .month--name {
+        h2 {
+            color: $siteBlack;
+            margin-bottom: 1rem;
+        }
+    }
+    .bands--link {
+        @include flexbox();
+        @include flexbox-align-items(center);
+        @include flexbox-justify-content(space-between);
+        position: relative;
+        padding: .5rem 1rem;
+        .link--arrow {
+            display: none;
+            width: 1rem;
+        }
+    }
+}
+
 @media only screen and (min-width: $smallTabletBreakpoint) {
     .events--event-container {
         @include flexbox();
@@ -6,9 +26,14 @@
             width: 50%;
             margin: 3.5rem auto;
         }
-        .events--list {
+        .events--month {
             width: 50%;
             margin: 3.5rem auto;
+        }
+        .bands--link {
+            .link--arrow {
+                display: block;
+            }
         }
     }
 }

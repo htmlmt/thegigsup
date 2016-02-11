@@ -41,8 +41,8 @@
     @include flexbox();
     @include flexbox-align-items(center);
     @include flexbox-justify-content(center);
+    position: relative;
     background-color: $siteGrey;
-    border-bottom: 5px solid $siteLightestGrey;
     .navigation--back-space {
         width: 0;
         display: none;
@@ -70,6 +70,15 @@
         .add--plus {
             width: 22px;
         }
+    }
+    .navigation--border {
+        @include transform-translate(0, 100%);
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        width: 100%;
+        height: 5px;
+        background-color: rgba(0,0,0,.2);
     }
     &.fixed {
         position: fixed;
