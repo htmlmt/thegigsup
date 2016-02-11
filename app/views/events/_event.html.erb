@@ -97,15 +97,11 @@
                     <p class="time--time">
                         <%= event.start.in_time_zone.strftime("%l:%M %P") %>
                     </p>
-                    <% if event.poster.url == "/posters/original/missing.png" %>
-                        <div class="time--upload">
+                    <div class="time--upload">
+                        <a href="https://www.facebook.com/sharer/sharer.php?u=http://www.thegigsup.com/events/<%= event.id %>">
                             <%= image_tag('upload-poster.png') %>
-                        </div>
-                    <% else %>
-                        <div class="time--upload" style="opacity: 0; cursor: default;">
-                            <%= image_tag('upload-poster.png') %>
-                        </div>
-                    <% end %>
+                        </a>
+                    </div>
                 </div>
             </div>
         <% end %>

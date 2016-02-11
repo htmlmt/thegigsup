@@ -1,13 +1,55 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>The Gigs Up</title>
+    <% if controller.action_name == 'index' %>
+        <title>The Gigs Up</title>
+        <meta property="og:title" content="The Gigs Up"/>
+        <meta property="og:url" content="http://www.thegigsup.com"/>
+        <meta property="og:image" content="<%= image_url('loading.png') %>"/>
+        <meta name="twitter:title" content="The Gigs Up">
+        <meta name="twitter:image" content="<%= image_url('loading.png') %>">
+    <% elsif @band != nil %>
+        <title>The Gigs Up | <%= @band.name %></title>
+        <meta property="og:title" content="The Gigs Up | <%= @band.name %>"/>
+        <meta property="og:url" content="http://www.thegigsup.com/bands/<%= @band.slug %>"/>
+        <meta property="og:image" content="<%= image_url('loading.png') %>"/>
+        <meta name="twitter:title" content="The Gigs Up | <%= @band.name %>">
+        <meta property="og:image" content="<%= image_url('loading.png') %>"/>
+    <% elsif @venue != nil %>
+        <title>The Gigs Up | <%= @venue.name %></title>
+        <meta property="og:title" content="The Gigs Up | <%= @venue.name %>"/>
+        <meta property="og:url" content="http://www.thegigsup.com/venues/<%= @venue.slug %>"/>
+        <meta property="og:image" content="<%= image_url('loading.png') %>"/>
+        <meta name="twitter:title" content="The Gigs Up | <%= @venue.name %>">
+        <meta property="og:image" content="<%= image_url('loading.png') %>"/>
+    <% else %>
+        <% bands_string = "" %>
+        <% @event.headliners.each_with_index do |band, index| %>
+            <% if @event.headliners.length == 1 %>
+                <% bands_string = Band.find(band).name %>
+            <% else %>
+                <% if index != @event.headliners.length - 1 %>
+                    <% bands_string = bands_string + ", " + Band.find(band).name %>
+                <% else %>
+                    <% bands_string = bands_string + " and " + Band.find(band).name %>
+                <% end %>
+            <% end %>
+        <% end %>
+        <title>The Gigs Up | <%= bands_string %> at <%= @event.venue.name %></title>
+        <meta property="og:title" content="The Gigs Up | <%= bands_string %> at <%= @event.venue.name %>"/>
+        <meta property="og:url" content="http://www.thegigsup.com/events/<%= @event.id %>"/>
+        <meta property="og:image" content="<%= image_url('loading.png') %>"/>
+        <meta name="twitter:title" content="The Gigs Up | <%= bands_string %> at <%= @event.venue.name %>">
+        <meta property="og:image" content="<%= image_url('loading.png') %>"/>
+    <% end %>
+    
     <meta charset="utf-8">
     <meta name="HandheldFriendly" content="True">
     <meta name="MobileOptimized" content="320">
     <meta name="viewport" content="width=device-width, initial-scale=1.0,user-scalable=no"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="description" content="Sioux Falls concerts, bold and beautiful." />
+    
     <link rel="apple-touch-icon" sizes="57x57" href="<%= image_url('favicons/apple-icon-57x57.png') %>">
     <link rel="apple-touch-icon" sizes="60x60" href="<%= image_url('favicons/apple-icon-60x60.png') %>">
     <link rel="apple-touch-icon" sizes="72x72" href="<%= image_url('favicons/apple-icon-72x72.png') %>">
@@ -25,6 +67,7 @@
     <meta name="msapplication-TileColor" content="#d13029">
     <meta name="msapplication-TileImage" href="<%= image_url('favicons/ms-icon-144x144.png') %>">
     <meta name="theme-color" content="#d13029">
+    
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
     <%= csrf_meta_tags %>

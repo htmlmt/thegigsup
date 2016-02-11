@@ -135,7 +135,7 @@ class EventsController < ApplicationController
                                     break
                                 end
                             end
-                            if band_in_lineup = false
+                            if band_in_lineup == false
                                 @event.bands << Band.find_by(name: name)
                                 supporting_acts = @event.supporting_acts.push(Band.find_by(name: name).id)
                                 @event.update(supporting_acts: supporting_acts)
