@@ -58,10 +58,10 @@ class EventsController < ApplicationController
         if params[:month] && params[:year]
             dateString = params[:month] + ' ' + params[:year]
             @month = Time.zone.parse(dateString)
-            events = Event.where("start >= ? AND start <= ?", @month, (@month + 11.month).end_of_month).order(:start)
+            events = Event.where("start >= ? AND start <= ?", @month, @month.end_of_month).order(:start)
         else
             @month = Time.current
-            events = Event.where("start >= ? AND start <= ?", @month, (@month + 11.month).end_of_month).order(:start)
+            events = Event.where("start >= ? AND start <= ?", @month, @month.end_of_month).order(:start)
         end
         
         @dates = []

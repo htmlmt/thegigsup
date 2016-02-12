@@ -163,15 +163,12 @@
         }
     }
     
-    .list--empty {
+    .month--empty {
         .empty--container {
             margin: 0 auto;
             background-color: $siteCalendarGrey;
             padding: 1rem 3rem;
             text-align: center;
-        }
-        .empty--message {
-            margin: 0 auto 1rem auto;
         }
         .empty--add {
             padding: 1rem;

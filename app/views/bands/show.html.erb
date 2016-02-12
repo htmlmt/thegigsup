@@ -1,5 +1,10 @@
 <div class="body--events">
-    <%= render "navigation/calendar", :link => '/bands/' + @band.slug + '/', :show_add_an_event => true, :show_months => true, :show_see_all_events => true %>
+    <%= render "navigation/calendar", 
+        :link => '/bands/' + @band.slug + '/', 
+        :show_add_an_event => false, 
+        :show_months => true, 
+        :show_see_all_events => true 
+    %>
     <div class="events--band-container">
         <div class="events--band">
             <div class="band--name">
@@ -96,18 +101,13 @@
                 <% end %>
             </div>
         </div>
-        <section class="events--list">
+        <section class="events--month">
             <% if @dates.count == 0 %>
-                <div class="list--empty">
+                <div class="month--empty">
                     <div class="empty--container">
                         <div class="empty--message">
                             <h4><%= @band.name %> has no events listed in <%= @month.strftime("%B") %>.</h4>
                         </div>
-                        <a href="/events/new">
-                            <div class="empty--add">
-                                Add an event
-                            </div>
-                        </a>
                     </div>
                 </div>
             <% end %>
