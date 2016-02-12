@@ -5,6 +5,16 @@
         :show_months => true, 
         :show_add_an_event => false 
     %>
+    <!-- <div class="events--tags">
+        <div class="tags--filter">
+            FILTER
+        </div>
+        <% @tags.each do |tag| %>
+            <div class="tags--tag">
+                <a href="/tags/<%= tag %>"><%= tag %></a>
+            </div>
+        <% end %>
+    </div> -->
     <section class="events--month">
         <% if @dates.count == 0 %>
             <div class="list--empty">
@@ -22,7 +32,7 @@
         <% end %>
         <% previous_date = false %>
         <% @dates.each_with_index do |date, index| %>
-            <%= render "event", :individual => false, :date => date, :event_scope => Event, :index => index, :previous_date => previous_date %>
+            <%= render "event", :tags => false, :individual => false, :date => date, :event_scope => Event, :index => index, :previous_date => previous_date %>
             <% previous_date = date %>
         <% end %>
     </section>

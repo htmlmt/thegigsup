@@ -39,6 +39,29 @@
     }
 }
 
+.events--tags {
+    @include flexbox();
+    @include flexbox-align-items(center);
+    max-width: 600px;
+    margin: 2rem auto;
+    width: 90%;
+    text-align: center;
+    .tags--filter {
+        text-transform: uppercase;
+        width: 4rem;
+        font-weight: 400;
+    }
+    .tags--tag {
+        padding: .5rem 1rem;
+        margin-right: .5rem;
+        background-color: $siteGrey;
+        width: 5rem;
+        a {
+            color: $white;
+        }
+    }
+}
+
 .body--events {
     h2,
     h3,

@@ -19,7 +19,7 @@
                         <% else %>
                             <strong>TAGS:</strong><br>
                         <% end %>
-                        <%= link_to tag, tag_link.gsub(' ', '-') %>
+                        <%= tag %>
                     <% end %>
                 </p>
             </div>
@@ -62,7 +62,7 @@
                         <% else %>
                             <strong>SIMILAR BANDS:</strong><br>
                         <% end %>
-                        <%= link_to band_record.name, band_link %>
+                        <%= band_record.name %>
                     <% end %>
                 </p>
             </div>
@@ -114,7 +114,8 @@
             <section class="events--month">
                 <% previous_date = false %>
                 <% @dates.each_with_index do |date, index| %>
-                    <%= render 'events/event', 
+                    <%= render 'events/event',
+                        :tags => false, 
                         :individual => false, 
                         :date => date, 
                         :event_scope => @band.events, 

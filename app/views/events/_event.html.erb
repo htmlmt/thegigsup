@@ -7,6 +7,21 @@
         <% end %>
     <% end %>
 <% end %>
+<% if tags == true %>
+    <% events = [] %>
+    <% event_scope.each do |event| %>
+        <% if event.start != nil %>
+            <% if event.start > date.beginning_of_day && event.start < date.end_of_day %>
+                <% events.push(event) %>
+            <% end %>
+        <% end %>
+    <% end %>
+<% elsif individual == false %>
+    <% events = event_scope.where('start BETWEEN ? AND ?', date.beginning_of_day, date.end_of_day).order(:start) %>
+<% else %>
+    <% events = Event.where(id: @event.id) %>
+<% end %>
+<% if events != [] %>
 <div class="month--day">
     <div class="day--number">
         <% if individual == false %>
@@ -17,93 +32,88 @@
         <h3><%= date.strftime("%e") %></h3>
         <h4><%= date.strftime("%a") %></h4>
     </div>
-    <div class="day--info">
-        <% if individual == false %>
-            <% events = event_scope.where('start BETWEEN ? AND ?', date.beginning_of_day, date.end_of_day).order(:start) %>
-        <% else %>
-            <% events = Event.where(id: @event.id) %>
-        <% end %>
-        
-        <% events.each do |event| %>
-            <div class="info--container">
-                <% if individual == false %>
-                <a href="/events/<%= event.id %>">
-                <% end %>
-                    <% if event.poster.url != "/posters/original/missing.png" %>
-                        <div class="info--bands" style="background-image: url(<%= image_url event.poster.url(:retina) %>">
-                            <div class="bands--overlay">
-                            </div>
-                    <% else %>
-                        <div class="info--bands">
+        <div class="day--info">
+            <% events.each do |event| %>
+                <div class="info--container">
+                    <% if individual == false %>
+                    <a href="/events/<%= event.id %>">
                     <% end %>
-                    <% if individual == true %>
-                        <% event.supporting_acts.each do |id| %>
-                            <a href="/bands/<%= Band.find(id).slug %>">
-                                <div class="bands--link">
-                                    <div class="link--name">
+                        <% if event.poster.url != "/posters/original/missing.png" %>
+                            <div class="info--bands" style="background-image: url(<%= image_url event.poster.url(:retina) %>">
+                                <div class="bands--overlay">
+                                </div>
+                        <% else %>
+                            <div class="info--bands">
+                        <% end %>
+                        <% if individual == true %>
+                            <% event.supporting_acts.each do |id| %>
+                                <a href="/bands/<%= Band.find(id).slug %>">
+                                    <div class="bands--link">
+                                        <div class="link--name">
+                                            <h2><%= Band.find(id).name %></h2>
+                                        </div>
+                                        <div class="link--arrow">
+                                            <%= image_tag('arrow-white.png') %>
+                                        </div>
+                                    </div>
+                                </a>
+                            <% end %>
+                            <% event.headliners.each do |id| %>
+                                <a href="/bands/<%= Band.find(id).slug %>">
+                                    <div class="bands--link">
+                                        <div class="link--name">
+                                            <h2><%= Band.find(id).name %></h2>
+                                        </div>
+                                        <div class="link--arrow">
+                                            <%= image_tag('arrow-white.png') %>
+                                        </div>
+                                    </div>
+                                </a>
+                            <% end %>
+                        <% else %>
+                            <% event.supporting_acts.each do |id| %>
+                                <div class="bands--name">
+                                    <h3><%= Band.find(id).name %></h3>
+                                </div>
+                            <% end %>
+                            <% event.headliners.each do |id| %>
+                                <div class="bands--headliner">
+                                    <div class="headliner--name">
                                         <h2><%= Band.find(id).name %></h2>
                                     </div>
-                                    <div class="link--arrow">
+                                    <div class="headliner--arrow">
                                         <%= image_tag('arrow-white.png') %>
                                     </div>
                                 </div>
-                            </a>
+                            <% end %>
                         <% end %>
-                        <% event.headliners.each do |id| %>
-                            <a href="/bands/<%= Band.find(id).slug %>">
-                                <div class="bands--link">
-                                    <div class="link--name">
-                                        <h2><%= Band.find(id).name %></h2>
-                                    </div>
-                                    <div class="link--arrow">
-                                        <%= image_tag('arrow-white.png') %>
-                                    </div>
-                                </div>
-                            </a>
-                        <% end %>
-                    <% else %>
-                        <% event.supporting_acts.each do |id| %>
-                            <div class="bands--name">
-                                <h3><%= Band.find(id).name %></h3>
+                        </div>
+                    <% if individual == false %>
+                    </a>
+                    <% end %>
+                    <div class="info--venue">
+                        <% venue_link = '/venues/' + event.venue.slug + '/' + @month.strftime("%B/%Y").downcase %>
+                        <%= link_to venue_link do %>
+                            <div class="venue--title">
+                                <p><%= event.venue.name %></p>
+                            </div>
+                            <div class="venue--arrow">
+                                <%= image_tag('arrow.png') %>
                             </div>
                         <% end %>
-                        <% event.headliners.each do |id| %>
-                            <div class="bands--headliner">
-                                <div class="headliner--name">
-                                    <h2><%= Band.find(id).name %></h2>
-                                </div>
-                                <div class="headliner--arrow">
-                                    <%= image_tag('arrow-white.png') %>
-                                </div>
-                            </div>
-                        <% end %>
-                    <% end %>
                     </div>
-                <% if individual == false %>
-                </a>
-                <% end %>
-                <div class="info--venue">
-                    <% venue_link = '/venues/' + event.venue.slug + '/' + @month.strftime("%B/%Y").downcase %>
-                    <%= link_to venue_link do %>
-                        <div class="venue--title">
-                            <p><%= event.venue.name %></p>
+                    <div class="info--time">
+                        <p class="time--time">
+                            <%= event.start.in_time_zone.strftime("%l:%M %P") %>
+                        </p>
+                        <div class="time--upload">
+                            <a href="https://www.facebook.com/sharer/sharer.php?u=http://www.thegigsup.com/events/<%= event.id %>" target="_blank">
+                                <%= image_tag('upload-poster.png') %>
+                            </a>
                         </div>
-                        <div class="venue--arrow">
-                            <%= image_tag('arrow.png') %>
-                        </div>
-                    <% end %>
-                </div>
-                <div class="info--time">
-                    <p class="time--time">
-                        <%= event.start.in_time_zone.strftime("%l:%M %P") %>
-                    </p>
-                    <div class="time--upload">
-                        <a href="https://www.facebook.com/sharer/sharer.php?u=http://www.thegigsup.com/events/<%= event.id %>" target="_blank">
-                            <%= image_tag('upload-poster.png') %>
-                        </a>
                     </div>
                 </div>
-            </div>
-        <% end %>
+            <% end %>
+        </div>
     </div>
-</div>
+<% end %>

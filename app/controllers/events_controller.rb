@@ -73,6 +73,41 @@ class EventsController < ApplicationController
                 end
             end
         end
+        
+        bands = Band.all
+        bands_with_events = []
+        bands.each do |band|
+            if band.events.count != 0
+                bands_with_events.push(band)
+            end
+        end
+        
+        tags = {}
+        
+        bands_with_events.each do |band|
+            band.tags.each do |tag|
+                puts tag
+                if tags.has_key? tag
+                    tags[tag] = tags[tag] + 1
+                else
+                    tags[tag] = 1
+                end
+            end
+        end
+        
+        tags = tags.sort_by {|k,v| v}.reverse
+        
+        @tags = []
+        
+        if tags.length <= 5
+            tags.each do |tag|
+                @tags.push(tag[0])
+            end
+        else
+            5.times do |tag|
+                @tags.push(tag[0])
+            end
+        end
     end
 
     # GET /events/1

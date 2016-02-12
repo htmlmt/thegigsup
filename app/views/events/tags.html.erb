@@ -1,6 +1,11 @@
 <div class="body--events">
-    <%= render "navigation/tags" %>
-    <section class="events--list">
+    <%= render "navigation/calendar", 
+        :link => '/events/', 
+        :show_see_all_events => false, 
+        :show_months => true, 
+        :show_add_an_event => false 
+    %>
+    <section class="events--month">
         <% if @dates.count == 0 %>
             <div class="list--empty">
                 <div class="empty--container">
@@ -15,62 +20,19 @@
                 </div>
             </div>
         <% end %>
-        <% @dates.each do |date| %>
-            <div class="list--day">
-                <div class="day--number">
-                    <h3><%= date.strftime("%e") %></h3>
-                    <h4><%= date.strftime("%a") %></h4>
-                </div>
-                <div class="day--info">
-                    <% events = Event.where('start BETWEEN ? AND ?', date.beginning_of_day, date.end_of_day).order(:start) %>
-                    <% events.each do |event| %>
-                        <% tag_applies = false %>
-                        <% event.bands.each do |band| %>
-                            <% band.tags.each do |tag| %>
-                                <% if tag.gsub(' ', '-') == @tag %>
-                                    <% tag_applies = true %>
-                                <% end %>
-                            <% end %>
-                        <% end %>
-                        <% if tag_applies == true %>
-                            <div class="info--container">
-                                <div class="info--bands">
-                                    <% event.bands.each do |band| %>
-                                        <% bands_link = '/bands/' + band.slug + '/' + @month.strftime("%B/%Y").downcase %>
-                                        <%= link_to bands_link do %>
-                                            <div class="bands--name">
-                                                <h2><%= band.name %></h2>
-                                            </div>
-                                            <div class="bands--arrow">
-                                                <%= image_tag('arrow-white.png') %>
-                                            </div>
-                                        <% end %>
-                                    <% end %>
-                                </div>
-                                <div class="info--venue">
-                                    <% venue_link = '/venues/' + event.venue.slug + '/' + @month.strftime("%B/%Y").downcase %>
-                                    <%= link_to venue_link do %>
-                                        <div class="venue--title">
-                                            <p><%= event.venue.name %></p>
-                                        </div>
-                                        <div class="venue--arrow">
-                                            <%= image_tag('arrow.png') %>
-                                        </div>
-                                    <% end %>
-                                </div>
-                                <div class="info--time">
-                                    <p class="time--time">
-                                        <%= event.start.in_time_zone.strftime("%l:%M %P") %>
-                                    </p>
-                                    <div class="time--upload">
-                                        <%= image_tag('upload-poster.png') %>
-                                    </div>
-                                </div>
-                            </div>
-                        <% end %>
-                    <% end %>
-                </div>
-            </div>
+        <% previous_date = false %>
+        <% bands = Band.all.select { |band| band.tags.include? @tag } %>
+        <% events = [] %>
+        <% bands.each do |band| %>
+            <% band.events.each do |event| %>
+                <% if events.include? event == false %>
+                    <% events.push(event) %>
+                <% end %>
+            <% end %>
+        <% end %>
+        <% @dates.each_with_index do |date, index| %>
+            <%= render "event", :tags => true, :individual => false, :date => date, :event_scope => events, :index => index, :previous_date => previous_date %>
+            <% previous_date = date %>
         <% end %>
     </section>
 </div>
