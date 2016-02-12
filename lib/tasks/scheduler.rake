@@ -171,6 +171,7 @@ namespace :events do
                             @venue.events.each do |event|
                                 if event.id == @event.id
                                     venue_has_event = true
+                                    break
                                 end
                             end
                             
@@ -198,6 +199,7 @@ namespace :events do
                                 @event.bands.each do |band|
                                     if @band.id == band.id
                                         event_has_band = true
+                                        break
                                     end
                                 end
                                 
