@@ -115,7 +115,7 @@
                 <% previous_date = false %>
                 <% @dates.each_with_index do |date, index| %>
                     <%= render 'events/event',
-                        :tags => false, 
+                        :tags => false,
                         :individual => false, 
                         :date => date, 
                         :event_scope => @band.events, 

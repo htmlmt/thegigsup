@@ -16,7 +16,7 @@
             <div class="month--name">
                 <h2><%= @event.start.strftime("%B") %></h2>
             </div>
-            <%= render "event", :individual => true %>
+            <%= render "event", :tags => false, :individual => true %>
         </section>
     </div>
 </div>
