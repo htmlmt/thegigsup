@@ -92,9 +92,6 @@
     &.fixed {
         margin: 106px auto 106px auto;
     }
-    .info--container > a > .info--bands {
-        padding: .5rem 0;
-    }
     .month--day {
         @include flexbox();
         @include flexbox-align-items(flex-start);
@@ -115,7 +112,6 @@
         .info--bands,
         .info--venue {
             .bands--headliner {
-                padding: .5rem 1rem;
                 @include flexbox();
                 @include flexbox-align-items(center);
                 @include flexbox-justify-content(space-between);
@@ -145,7 +141,9 @@
             background-size: 100%;
             background-position: 0% 40%;
             .bands--name,
-            .bands--headliner {
+            .bands--headliner,
+            .bands--link {
+                padding: 1rem;
                 position: relative;
                 z-index: 100;
             }

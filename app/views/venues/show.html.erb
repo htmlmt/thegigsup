@@ -48,7 +48,7 @@
                 <% end %>
             </div>
         </div>
-        <section class="events--list">
+        <section class="events--month">
             <% if @dates.count == 0 %>
                 <div class="month--empty">
                     <div class="empty--container">
@@ -58,20 +58,18 @@
                     </div>
                 </div>
             <% end %>
-            <section class="events--month">
-                <% previous_date = false %>
-                <% @dates.each_with_index do |date, index| %>
-                    <%= render 'events/event', 
-                        :tags => false,
-                        :individual => false, 
-                        :date => date, 
-                        :event_scope => @venue.events, 
-                        :index => index, 
-                        :previous_date => previous_date 
-                    %>
-                    <% previous_date = date %>
-                <% end %>
-            </section>
-        </div>
+            <% previous_date = false %>
+            <% @dates.each_with_index do |date, index| %>
+                <%= render 'events/event', 
+                    :tags => false,
+                    :individual => false, 
+                    :date => date, 
+                    :event_scope => @venue.events, 
+                    :index => index, 
+                    :previous_date => previous_date 
+                %>
+                <% previous_date = date %>
+            <% end %>
+        </section>
     </div>
 </div>

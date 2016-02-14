@@ -111,20 +111,18 @@
                     </div>
                 </div>
             <% end %>
-            <section class="events--month">
-                <% previous_date = false %>
-                <% @dates.each_with_index do |date, index| %>
-                    <%= render 'events/event',
-                        :tags => false,
-                        :individual => false, 
-                        :date => date, 
-                        :event_scope => @band.events, 
-                        :index => index, 
-                        :previous_date => previous_date 
-                    %>
-                    <% previous_date = date %>
-                <% end %>
-            </section>
+            <% previous_date = false %>
+            <% @dates.each_with_index do |date, index| %>
+                <%= render 'events/event',
+                    :tags => false,
+                    :individual => false, 
+                    :date => date, 
+                    :event_scope => @band.events, 
+                    :index => index, 
+                    :previous_date => previous_date 
+                %>
+                <% previous_date = date %>
+            <% end %>
         </section>
     </div>
 </div>
