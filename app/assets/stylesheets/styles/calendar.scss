@@ -88,9 +88,12 @@
 .events--month {
     max-width: 600px;
     width: 90%;
-    margin: 55px auto;
+    margin: 55px auto 106px auto;
     &.fixed {
-        margin: 106px auto 55px auto;
+        margin: 106px auto 106px auto;
+    }
+    .info--container > a > .info--bands {
+        padding: .5rem 0;
     }
     .month--day {
         @include flexbox();
@@ -139,13 +142,15 @@
         .info--bands {
             position: relative;
             background-color: $bandBackgroundGrey;
-            padding: .5rem 0;
             background-size: 100%;
             background-position: 0% 40%;
             .bands--name,
             .bands--headliner {
                 position: relative;
                 z-index: 100;
+            }
+            .headliner--name {
+                padding-right: .5rem;
             }
             .bands--overlay {
                 position: absolute;
@@ -161,6 +166,9 @@
         }
         .info--venue {
             background-color: $siteCalendarGrey;
+            .venue--title {
+                padding-right: .5rem;
+            }
             .venue--arrow {
                 width: 1rem;
             }

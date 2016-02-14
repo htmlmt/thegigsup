@@ -8,6 +8,7 @@
         <meta property="og:image" content="<%= image_url('loading.png') %>"/>
         <meta name="twitter:title" content="The Gigs Up">
         <meta name="twitter:image" content="<%= image_url('loading.png') %>">
+        <meta name="description" content="Sioux Falls concerts, bold and beautiful." />
     <% elsif @band != nil %>
         <title>The Gigs Up | <%= @band.name %></title>
         <meta property="og:title" content="The Gigs Up | <%= @band.name %>"/>
@@ -15,6 +16,7 @@
         <meta property="og:image" content="<%= image_url('loading.png') %>"/>
         <meta name="twitter:title" content="The Gigs Up | <%= @band.name %>">
         <meta name="twitter:image" content="<%= image_url('loading.png') %>">
+        <meta name="description" content="<%= @band.name %>'s concerts in and around Sioux Falls." />
     <% elsif @venue != nil %>
         <title>The Gigs Up | <%= @venue.name %></title>
         <meta property="og:title" content="The Gigs Up | <%= @venue.name %>"/>
@@ -22,6 +24,7 @@
         <meta property="og:image" content="<%= image_url('loading.png') %>"/>
         <meta name="twitter:title" content="The Gigs Up | <%= @venue.name %>">
         <meta name="twitter:image" content="<%= image_url('loading.png') %>">
+        <meta name="description" content="<%= @venue.name %>'s concert calendar." />
     <% elsif @tag != nil %>
         <title>The Gigs Up | <%= @tag.capitalize %> Concerts</title>
         <meta property="og:title" content="The Gigs Up | <%= @tag.capitalize %> Concerts"/>
@@ -29,6 +32,7 @@
         <meta property="og:image" content="<%= image_url('loading.png') %>"/>
         <meta name="twitter:title" content="The Gigs Up | <%= @tag.capitalize %> Concerts">
         <meta name="twitter:image" content="<%= image_url('loading.png') %>">
+        <meta name="description" content="<%= @tag.capitalize %> concerts in and around Sioux Falls." />
     <% else %>
         <% bands_string = "" %>
         <% @event.headliners.each_with_index do |band, index| %>
@@ -44,7 +48,8 @@
         <% end %>
         <title>The Gigs Up | <%= bands_string %> at <%= @event.venue.name %></title>
         <meta property="og:title" content="The Gigs Up | <%= bands_string %> at <%= @event.venue.name %>"/>
-        <meta property="og:description" content="Concert: <%= @event.start.strftime('%B %-d at%l:%M %P') %>"/>
+        <meta property="og:description" content="Concert: <%= @event.start.strftime('%B %-d at %-l:%M %P') %>"/>
+        <meta name="description" content="Concert: <%= @event.start.strftime('%B %-d at %-l:%M %P') %>" />
         <meta property="og:url" content="http://www.thegigsup.com/events/<%= @event.id %>"/>
         <% if @event.poster.url != "/posters/original/missing.png" %>
             <meta property="og:image" content="<%= image_url @event.poster.url(:retina) %>"/>
@@ -61,7 +66,6 @@
     <meta name="MobileOptimized" content="320">
     <meta name="viewport" content="width=device-width, initial-scale=1.0,user-scalable=no"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <meta name="description" content="Sioux Falls concerts, bold and beautiful." />
     
     <link rel="apple-touch-icon" sizes="57x57" href="<%= image_url('favicons/apple-icon-57x57.png') %>">
     <link rel="apple-touch-icon" sizes="60x60" href="<%= image_url('favicons/apple-icon-60x60.png') %>">

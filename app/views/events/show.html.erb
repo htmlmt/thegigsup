@@ -1,5 +1,5 @@
 <div class="body--events">
-    <%= render "navigation/calendar", :show_see_all_events => true, :see_all_events_link => '/events/', :show_months => false, :show_add_an_event => true %>
+    <%= render "navigation/calendar", :show_see_all_events => true, :see_all_events_link => '/events/', :show_months => false, :show_add_an_event => false %>
     <div class="events--event-container">
         <% if @event.poster.url != "/posters/original/missing.png" %>
             <div class="events--info">
