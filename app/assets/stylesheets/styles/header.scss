@@ -20,7 +20,7 @@
 }
 
 .header--social {
-    width: 1.5rem;
+    width: 3.5rem;
     a {
         width: 1.5rem;
     }
@@ -35,9 +35,9 @@
         @include flexbox();
         @include flexbox-align-items(center);
         @include flexbox-justify-content(space-between);
-        width: 2.25rem;
+        width: 4.5rem;
         a {
-            width: 2.25rem;
+            width: 2rem;
         }
     }
 }
