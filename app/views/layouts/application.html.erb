@@ -68,6 +68,7 @@
         <meta name="description" content="Concert: <%= @event.start.strftime('%B %-d at %-l:%M %P') %>" />
         <meta property="og:url" content="http://www.thegigsup.com/events/<%= @event.id %>"/>
         <% if @event.poster.url != "/posters/original/missing.png" %>
+            <% binding.pry %>
             <meta property="og:image" content="<%= image_url @event.poster.url(:retina) %>"/>
             <meta name="twitter:image" content="<%= image_url @event.poster.url(:retina) %>">
         <% else %>

@@ -75,40 +75,40 @@ class EventsController < ApplicationController
             end
         end
         
-        bands = Band.all
-        bands_with_events = []
-        bands.each do |band|
-            if band.events.count != 0
-                bands_with_events.push(band)
-            end
-        end
+        # bands = Band.all
+        # bands_with_events = []
+        # bands.each do |band|
+        #     if band.events.count != 0
+        #         bands_with_events.push(band)
+        #     end
+        # end
         
-        tags = {}
+        # tags = {}
         
-        bands_with_events.each do |band|
-            band.tags.each do |tag|
-                puts tag
-                if tags.has_key? tag
-                    tags[tag] = tags[tag] + 1
-                else
-                    tags[tag] = 1
-                end
-            end
-        end
+        # bands_with_events.each do |band|
+        #     band.tags.each do |tag|
+        #         puts tag
+        #         if tags.has_key? tag
+        #             tags[tag] = tags[tag] + 1
+        #         else
+        #             tags[tag] = 1
+        #         end
+        #     end
+        # end
         
-        tags = tags.sort_by {|k,v| v}.reverse
+        # tags = tags.sort_by {|k,v| v}.reverse
         
-        @tags = []
+        # @tags = []
         
-        if tags.length <= 5
-            tags.each do |tag|
-                @tags.push(tag[0])
-            end
-        else
-            5.times do |tag|
-                @tags.push(tag[0])
-            end
-        end
+        # if tags.length <= 5
+        #     tags.each do |tag|
+        #         @tags.push(tag[0])
+        #     end
+        # else
+        #     5.times do |tag|
+        #         @tags.push(tag[0])
+        #     end
+        # end
     end
 
     # GET /events/1
@@ -150,64 +150,66 @@ class EventsController < ApplicationController
                 event_date_time = event_params[:start] + ' CST'
                 @event.update(start: DateTime.strptime(event_date_time, '%m/%d/%Y %l:%M %p %Z'))
                 @venue.events << @event
-                repost = Repost.create()
-                @event.reposts << repost
                 
-                supporting_acts = params["supporting-acts"]
-                
-                supporting_acts.each do |index, name|
-                    name = name.strip
-                    unless name == ""
-                        if Band.find_by(name: name) == nil
-                            @event.bands << Band.create(name: name)
-                            supporting_acts = @event.supporting_acts.push(Band.find_by(name: name).id)
-                            @event.update(supporting_acts: supporting_acts)
-                        else
-                            @band = Band.find_by(name: name)
-                            band_in_lineup = false
-                            @event.bands.each do |band|
-                                if band.id == @band.id
-                                    band_in_lineup = true
-                                    break
-                                end
-                            end
-                            if band_in_lineup == false
-                                @event.bands << Band.find_by(name: name)
+                if params["supporting_acts"] != nil
+                    supporting_acts = params["supporting-acts"]
+                    supporting_acts.each do |index, name|
+                        name = name.strip
+                        unless name == ""
+                            if Band.find_by(name: name) == nil
+                                @event.bands << Band.create(name: name)
                                 supporting_acts = @event.supporting_acts.push(Band.find_by(name: name).id)
                                 @event.update(supporting_acts: supporting_acts)
                             else
-                                supporting_acts = @event.supporting_acts.push(Band.find_by(name: name).id)
-                                @event.update(supporting_acts: supporting_acts)
+                                @band = Band.find_by(name: name)
+                                band_in_lineup = false
+                                @event.bands.each do |band|
+                                    if band.id == @band.id
+                                        band_in_lineup = true
+                                        break
+                                    end
+                                end
+                                if band_in_lineup == false
+                                    @event.bands << Band.find_by(name: name)
+                                    supporting_acts = @event.supporting_acts.push(Band.find_by(name: name).id)
+                                    @event.update(supporting_acts: supporting_acts)
+                                else
+                                    supporting_acts = @event.supporting_acts.push(Band.find_by(name: name).id)
+                                    @event.update(supporting_acts: supporting_acts)
+                                end
                             end
                         end
                     end
                 end
                 
-                headliners = params["headliners"]
                 
-                headliners.each do |index, name|
-                    name = name.strip
-                    unless name == ""
-                        if Band.find_by(name: name) == nil
-                            @event.bands << Band.create(name: name)
-                            headliners = @event.headliners.push(Band.find_by(name: name).id)
-                            @event.update(headliners: headliners)
-                        else
-                            @band = Band.find_by(name: name)
-                            band_in_lineup = false
-                            @event.bands.each do |band|
-                                if band.id == @band.id
-                                    band_in_lineup = true
-                                    break
-                                end
-                            end
-                            if band_in_lineup == false
-                                @event.bands << Band.find_by(name: name)
+                
+                if params["headliners"] != nil
+                    headliners = params["headliners"]
+                    headliners.each do |index, name|
+                        name = name.strip
+                        unless name == ""
+                            if Band.find_by(name: name) == nil
+                                @event.bands << Band.create(name: name)
                                 headliners = @event.headliners.push(Band.find_by(name: name).id)
                                 @event.update(headliners: headliners)
                             else
-                                headliners = @event.headliners.push(Band.find_by(name: name).id)
-                                @event.update(headliners: headliners)
+                                @band = Band.find_by(name: name)
+                                band_in_lineup = false
+                                @event.bands.each do |band|
+                                    if band.id == @band.id
+                                        band_in_lineup = true
+                                        break
+                                    end
+                                end
+                                if band_in_lineup == false
+                                    @event.bands << Band.find_by(name: name)
+                                    headliners = @event.headliners.push(Band.find_by(name: name).id)
+                                    @event.update(headliners: headliners)
+                                else
+                                    headliners = @event.headliners.push(Band.find_by(name: name).id)
+                                    @event.update(headliners: headliners)
+                                end
                             end
                         end
                     end
