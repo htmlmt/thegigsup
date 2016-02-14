@@ -80,12 +80,12 @@ var animations = {
             if ($('.body--header').outerHeight() < scrollTop) {
                 if (element.element.hasClass('fixed') == false) {
                     element.element.addClass('fixed');
-                    $('.events--month').addClass('fixed');
+                    $('.body--header').addClass('fixed');
                 }
             } else {
                 if (element.element.hasClass('fixed')) {
                     element.element.removeClass('fixed');
-                    $('.events--month').removeClass('fixed');
+                    $('.body--header').removeClass('fixed');
                 }
             }
         });
