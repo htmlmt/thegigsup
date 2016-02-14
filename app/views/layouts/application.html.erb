@@ -55,7 +55,9 @@
             <% if @event.headliners.length == 1 %>
                 <% bands_string = Band.find(band).name %>
             <% else %>
-                <% if index != @event.headliners.length - 1 %>
+                <% if index == 0 %>
+                    <% bands_string = Band.find(band).name %>
+                <% elsif index != @event.headliners.length - 1 %>
                     <% bands_string = bands_string + ", " + Band.find(band).name %>
                 <% else %>
                     <% bands_string = bands_string + " and " + Band.find(band).name %>
