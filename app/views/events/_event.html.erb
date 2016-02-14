@@ -39,7 +39,7 @@
                     <a href="/events/<%= event.id %>">
                     <% end %>
                         <% if event.poster.url != "/posters/original/missing.png" %>
-                            <div class="info--bands" style="background-image: url(<%= image_url event.poster.url(:retina) %>">
+                            <div class="info--bands" style="background-image: url(<%= image_url event.poster.url(:retina) %>)">
                                 <div class="bands--overlay">
                                 </div>
                         <% else %>
