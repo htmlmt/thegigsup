@@ -5,28 +5,13 @@
         :show_months => true, 
         :show_add_an_event => false 
     %>
-    <!-- <div class="events--tags">
-        <div class="tags--filter">
-            FILTER
-        </div>
-        <% @tags.each do |tag| %>
-            <div class="tags--tag">
-                <a href="/tags/<%= tag %>"><%= tag %></a>
-            </div>
-        <% end %>
-    </div> -->
     <section class="events--month">
         <% if @dates.count == 0 %>
-            <div class="list--empty">
+            <div class="month--empty">
                 <div class="empty--container">
                     <div class="empty--message">
                         <h4>No events are listed in <%= @month.strftime("%B") %>.</h4>
                     </div>
-                    <a href="/events/new">
-                        <div class="empty--add">
-                            Add an event
-                        </div>
-                    </a>
                 </div>
             </div>
         <% end %>

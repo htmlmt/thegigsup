@@ -50,16 +50,11 @@
         </div>
         <section class="events--list">
             <% if @dates.count == 0 %>
-                <div class="list--empty">
+                <div class="month--empty">
                     <div class="empty--container">
                         <div class="empty--message">
                             <h4><%= @venue.name %> has no events listed in <%= @month.strftime("%B") %>.</h4>
                         </div>
-                        <a href="/events/new/venues/<%= @venue.slug %>">
-                            <div class="empty--add">
-                                Add an event
-                            </div>
-                        </a>
                     </div>
                 </div>
             <% end %>

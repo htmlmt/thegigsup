@@ -88,7 +88,10 @@
 .events--month {
     max-width: 600px;
     width: 90%;
-    margin: 3.5rem auto;
+    margin: 55px auto;
+    &.fixed {
+        margin: 106px auto 55px auto;
+    }
     .month--day {
         @include flexbox();
         @include flexbox-align-items(flex-start);
@@ -153,29 +156,30 @@
                 background-color: rgba(0, 0, 0, .7);
             }
             .headliner--arrow {
-                display: none;
                 width: 1rem;
             }
         }
         .info--venue {
             background-color: $siteCalendarGrey;
             .venue--arrow {
-                display: none;
                 width: 1rem;
             }
         }
         .info--time {
             @include flexbox();
             @include flexbox-align-items(center);
+            @include flexbox-justify-content(space-between);
             position: relative;
             background-color: $timeBackgroundGrey;
             .time--time {
                 padding-left: 1rem;
-                width: 82.5%;
             }
-            .time--upload {
-                width: 17.5%;
+            .time--share {
+                padding: 1rem 2rem;
                 cursor: pointer;
+                background-color: $siteGrey;
+                text-align: center;
+                color: $white;
             }
         }
         .info--container {
@@ -199,23 +203,6 @@
             color: $white;
             width: 10rem;
             margin: 0 auto;
-        }
-    }
-}
-
-@media only screen and (min-width: $smallTabletBreakpoint) {
-    .events--month {
-        .month--day {
-            .info--bands {
-                .headliner--arrow {
-                    display: block;
-                }
-            }
-            .info--venue {
-                .venue--arrow {
-                    display: block;
-                }
-            }
         }
     }
 }
