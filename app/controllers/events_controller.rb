@@ -152,7 +152,7 @@ class EventsController < ApplicationController
                 @venue.events << @event
                 
                 if params["supporting_acts"] != nil
-                    supporting_acts = params["supporting-acts"]
+                    supporting_acts = params["supporting_acts"]
                     supporting_acts.each do |index, name|
                         name = name.strip
                         unless name == ""
@@ -181,8 +181,6 @@ class EventsController < ApplicationController
                         end
                     end
                 end
-                
-                
                 
                 if params["headliners"] != nil
                     headliners = params["headliners"]
