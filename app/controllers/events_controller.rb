@@ -3,6 +3,7 @@ class EventsController < ApplicationController
     autocomplete :band, :name, :full => true
     
     before_action :set_event, only: [:show, :edit, :update, :destroy]
+    http_basic_authenticate_with name: ENV["ADMIN_USERNAME"], password: ENV["ADMIN_PASSWORD"], except: [:show, :index]
     
     def gigs
         reposts = Repost.order(:created_at)

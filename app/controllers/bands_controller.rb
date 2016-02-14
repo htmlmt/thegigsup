@@ -1,5 +1,6 @@
 class BandsController < ApplicationController
   before_action :set_band, only: [:show, :edit, :update, :destroy]
+  http_basic_authenticate_with name: ENV["ADMIN_USERNAME"], password: ENV["ADMIN_PASSWORD"], except: :show
 
   # GET /bands
   # GET /bands.json

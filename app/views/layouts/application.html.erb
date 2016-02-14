@@ -9,6 +9,22 @@
         <meta name="twitter:title" content="The Gigs Up">
         <meta name="twitter:image" content="<%= image_url('loading.png') %>">
         <meta name="description" content="Sioux Falls concerts, bold and beautiful." />
+    <% elsif controller.action_name == 'new' %>
+        <title>The Gigs Up</title>
+        <meta property="og:title" content="The Gigs Up | New"/>
+        <meta property="og:url" content="http://www.thegigsup.com"/>
+        <meta property="og:image" content="<%= image_url('loading.png') %>"/>
+        <meta name="twitter:title" content="The Gigs Up">
+        <meta name="twitter:image" content="<%= image_url('loading.png') %>">
+        <meta name="description" content="Sioux Falls concerts, bold and beautiful." />
+    <% elsif controller.action_name == 'edit' %>
+        <title>The Gigs Up</title>
+        <meta property="og:title" content="The Gigs Up | Edit"/>
+        <meta property="og:url" content="http://www.thegigsup.com"/>
+        <meta property="og:image" content="<%= image_url('loading.png') %>"/>
+        <meta name="twitter:title" content="The Gigs Up">
+        <meta name="twitter:image" content="<%= image_url('loading.png') %>">
+        <meta name="description" content="Sioux Falls concerts, bold and beautiful." />
     <% elsif @band != nil %>
         <title>The Gigs Up | <%= @band.name %></title>
         <meta property="og:title" content="The Gigs Up | <%= @band.name %>"/>
