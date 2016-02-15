@@ -42,14 +42,13 @@
                         </div>
                     <% end %>
                 </div>
-                
                 <div id="add-supporting-act">
                     ADD SUPPORTING ACT
                 </div>
             </div>
         
             <div class="bands--headliners">
-                <%= f.label 'Headliner(s) (ordered by set time)' %>
+                <%= f.label 'Headliners (ordered by set time)' %>
                 <div class="headliners--container">
                     <% @event.headliners.each_with_index do |id, index| %>
                         <div class="field">

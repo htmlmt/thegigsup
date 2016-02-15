@@ -20,24 +20,17 @@
 }
 
 .header--social {
-    width: 3.5rem;
+    @include flexbox();
+    @include flexbox-align-items(center);
+    @include flexbox-justify-content(space-between);
+    width: 4.5rem;
     a {
-        width: 1.5rem;
+        width: 2rem;
     }
 }
 
 @media only screen and (min-width: 380px) {
     .header--logo {
         width: 250px;
-    }
-    
-    .header--social {
-        @include flexbox();
-        @include flexbox-align-items(center);
-        @include flexbox-justify-content(space-between);
-        width: 4.5rem;
-        a {
-            width: 2rem;
-        }
     }
 }
