@@ -29,6 +29,7 @@ footer {
             margin: 0;
         }
         .love--heart {
+            @include animation('beat 2s -1');
             background-image: image-url('heart.png');
             background-size: contain;
             background-position: 50% 50%;
@@ -40,3 +41,9 @@ footer {
         }
     }
 }
+
+ @include keyframes(beat) {
+     0%   { @include transform-scale(1, 1) }
+     50%   { @include transform-scale(1.5, 1.5) }
+     100% { @include transform-scale(1, 1) }
+ }
